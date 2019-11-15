@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DatePickerViewController" customModule="RxSwift_test" customModuleProvider="target">
+            <connections>
+                <outlet property="LBLTIME" destination="WUj-Xq-1HH" id="Unu-rp-0yu"/>
+                <outlet property="btnAction" destination="Haj-Oq-4X6" id="VF7-7v-e4q"/>
+                <outlet property="vPickView" destination="Vri-YC-pyW" id="7bc-vp-Vdl"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Vri-YC-pyW">
+                    <rect key="frame" x="0.0" y="680" width="414" height="216"/>
+                    <date key="date" timeIntervalSinceReferenceDate="587986384.79722595">
+                        <!--2019-08-20 09:33:04 +0000-->
+                    </date>
+                </datePicker>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUj-Xq-1HH">
+                    <rect key="frame" x="50" y="284" width="314" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Haj-Oq-4X6">
+                    <rect key="frame" x="0.0" y="650" width="414" height="30"/>
+                    <state key="normal" title="开始"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Haj-Oq-4X6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Qp3-7A-lDB"/>
+                <constraint firstItem="Vri-YC-pyW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="WXO-q9-MfH"/>
+                <constraint firstItem="Vri-YC-pyW" firstAttribute="top" secondItem="Haj-Oq-4X6" secondAttribute="bottom" id="Ynk-0Y-U4H"/>
+                <constraint firstItem="Vri-YC-pyW" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="a0B-kA-gJ5"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Haj-Oq-4X6" secondAttribute="trailing" id="c3d-6x-KGz"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="WUj-Xq-1HH" secondAttribute="trailing" constant="50" id="cvq-qh-eEp"/>
+                <constraint firstAttribute="bottom" secondItem="Vri-YC-pyW" secondAttribute="bottom" id="k84-do-fdE"/>
+                <constraint firstItem="WUj-Xq-1HH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="x1j-n1-MtF"/>
+                <constraint firstItem="WUj-Xq-1HH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="240" id="xWU-jm-UwC"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>
