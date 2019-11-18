@@ -11,7 +11,8 @@
 		025F9735230BE23100B73BB9 /* TapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F9734230BE23100B73BB9 /* TapViewController.swift */; };
 		025F973A230BF4CD00B73BB9 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F9738230BF4CD00B73BB9 /* DatePickerViewController.swift */; };
 		025F973B230BF4CD00B73BB9 /* DatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 025F9739230BF4CD00B73BB9 /* DatePickerViewController.xib */; };
-		0266EFF6237E8BA900825885 /* SessionObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0266EFF5237E8BA900825885 /* SessionObj.swift */; };
+		0266EFFB237EB34800825885 /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0266EFF9237EB34800825885 /* SessionViewController.swift */; };
+		0266EFFC237EB34800825885 /* SessionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0266EFFA237EB34800825885 /* SessionViewController.xib */; };
 		0279056522EEFBB60005333B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279056422EEFBB60005333B /* AppDelegate.swift */; };
 		0279056722EEFBB60005333B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0279056622EEFBB60005333B /* ViewController.swift */; };
 		0279056A22EEFBB60005333B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0279056822EEFBB60005333B /* Main.storyboard */; };
@@ -38,7 +39,8 @@
 		025F9734230BE23100B73BB9 /* TapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapViewController.swift; sourceTree = "<group>"; };
 		025F9738230BF4CD00B73BB9 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		025F9739230BF4CD00B73BB9 /* DatePickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DatePickerViewController.xib; sourceTree = "<group>"; };
-		0266EFF5237E8BA900825885 /* SessionObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionObj.swift; sourceTree = "<group>"; };
+		0266EFF9237EB34800825885 /* SessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewController.swift; sourceTree = "<group>"; };
+		0266EFFA237EB34800825885 /* SessionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionViewController.xib; sourceTree = "<group>"; };
 		0279056122EEFBB60005333B /* RxSwift-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RxSwift-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0279056422EEFBB60005333B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0279056622EEFBB60005333B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,7 +80,8 @@
 		0266EFF4237E8B7B00825885 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				0266EFF5237E8BA900825885 /* SessionObj.swift */,
+				0266EFF9237EB34800825885 /* SessionViewController.swift */,
+				0266EFFA237EB34800825885 /* SessionViewController.xib */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				02EE692D2303E8AF00DE893E /* TextFieldsViewController.xib in Resources */,
 				0279056F22EEFBB70005333B /* LaunchScreen.storyboard in Resources */,
 				0279056C22EEFBB70005333B /* Assets.xcassets in Resources */,
+				0266EFFC237EB34800825885 /* SessionViewController.xib in Resources */,
 				025F973B230BF4CD00B73BB9 /* DatePickerViewController.xib in Resources */,
 				0279056A22EEFBB60005333B /* Main.storyboard in Resources */,
 			);
@@ -317,11 +321,11 @@
 				02EE692C2303E8AF00DE893E /* TextFieldsViewController.swift in Sources */,
 				02E64EC5230E74D90023EC65 /* RxDataSourceViewController.swift in Sources */,
 				0279056522EEFBB60005333B /* AppDelegate.swift in Sources */,
+				0266EFFB237EB34800825885 /* SessionViewController.swift in Sources */,
 				02C14EA3230E977F00328B26 /* UINavigationItem+Extension.swift in Sources */,
 				02EE692323015D6900DE893E /* TableViewSimpleVVM.swift in Sources */,
 				02EE691F23015D1800DE893E /* TableViewSimpleViewController.swift in Sources */,
 				02F35C84237C1961001AE5B8 /* PickViewViewController.swift in Sources */,
-				0266EFF6237E8BA900825885 /* SessionObj.swift in Sources */,
 				025F9735230BE23100B73BB9 /* TapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

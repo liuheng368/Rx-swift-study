@@ -13,7 +13,6 @@ class ViewController: UIViewController,UITableViewDelegate {
     @IBOutlet weak var tvMain: UITableView!
     
     var arr : [String] = []
-    lazy var sessionObj = SessionObj()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +24,7 @@ class ViewController: UIViewController,UITableViewDelegate {
                "DatePickerViewController",
                "RxDataSourceViewController",
                "PickViewViewController",
-               "SessionNetwork"]
+               "SessionViewController"]
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -47,9 +46,7 @@ class ViewController: UIViewController,UITableViewDelegate {
         case 6:
             vc = PickViewViewController()
         case 7:
-//            sessionObj.norSession()
-            sessionObj.errSession()
-            return
+            vc = SessionViewController()
         default:break
         }
         self.navigationController?.pushViewController(vc, animated: true)

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SessionViewController" customModule="RxSwift_test" customModuleProvider="target">
+            <connections>
+                <outlet property="btnCanle" destination="nup-Dp-nGG" id="NbA-4M-0cL"/>
+                <outlet property="btnError" destination="0Vg-e6-ML5" id="S4M-OF-LFV"/>
+                <outlet property="btnHandle" destination="l4E-Kv-pEC" id="b8f-L1-Vng"/>
+                <outlet property="btnSimple" destination="NQH-Xx-kBq" id="dRN-Jb-vo9"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NQH-Xx-kBq">
+                    <rect key="frame" x="176" y="144" width="62" height="30"/>
+                    <state key="normal" title="简单请求"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Vg-e6-ML5">
+                    <rect key="frame" x="176" y="274" width="62" height="30"/>
+                    <state key="normal" title="错误请求"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4E-Kv-pEC">
+                    <rect key="frame" x="161" y="404" width="92" height="30"/>
+                    <state key="normal" title="手动发起请求"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nup-Dp-nGG">
+                    <rect key="frame" x="161" y="534" width="92" height="30"/>
+                    <state key="normal" title="手动取消请求"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="nup-Dp-nGG" firstAttribute="top" secondItem="l4E-Kv-pEC" secondAttribute="bottom" constant="100" id="1dd-FG-HAL"/>
+                <constraint firstItem="nup-Dp-nGG" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="1fO-KC-9J3"/>
+                <constraint firstItem="NQH-Xx-kBq" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="100" id="9y5-hn-oWu"/>
+                <constraint firstItem="l4E-Kv-pEC" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Dqu-4Y-Gem"/>
+                <constraint firstItem="NQH-Xx-kBq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WbD-0C-5UF"/>
+                <constraint firstItem="l4E-Kv-pEC" firstAttribute="top" secondItem="0Vg-e6-ML5" secondAttribute="bottom" constant="100" id="djj-HQ-Z8E"/>
+                <constraint firstItem="0Vg-e6-ML5" firstAttribute="top" secondItem="NQH-Xx-kBq" secondAttribute="bottom" constant="100" id="tD6-7J-ZBy"/>
+                <constraint firstItem="0Vg-e6-ML5" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="tyk-gl-Irg"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="139" y="154"/>
+        </view>
+    </objects>
+</document>
