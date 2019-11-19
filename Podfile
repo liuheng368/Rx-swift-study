@@ -7,6 +7,8 @@ target 'RxSwift-test' do
      pod 'RxSwift'
      pod 'RxCocoa'
      pod 'RxDataSources'
+     pod 'MLeaksFinder'
+     pod 'CleanJSON'
 
 end
 

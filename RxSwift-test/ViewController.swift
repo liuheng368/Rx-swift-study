@@ -24,7 +24,8 @@ class ViewController: UIViewController,UITableViewDelegate {
                "DatePickerViewController",
                "RxDataSourceViewController",
                "PickViewViewController",
-               "SessionViewController"]
+               "SessionViewController",
+               "SessionTableViewController"]
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -47,6 +48,8 @@ class ViewController: UIViewController,UITableViewDelegate {
             vc = PickViewViewController()
         case 7:
             vc = SessionViewController()
+        case 8:
+            vc = SessionTableViewController()
         default:break
         }
         self.navigationController?.pushViewController(vc, animated: true)
