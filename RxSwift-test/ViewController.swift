@@ -25,7 +25,8 @@ class ViewController: UIViewController,UITableViewDelegate {
                "RxDataSourceViewController",
                "PickViewViewController",
                "SessionViewController",
-               "SessionTableViewController"]
+               "SessionTableViewController",
+               "UploadViewController"]
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -50,6 +51,8 @@ class ViewController: UIViewController,UITableViewDelegate {
             vc = SessionViewController()
         case 8:
             vc = SessionTableViewController()
+        case 9:
+            vc = UploadViewController(nibName: "UploadViewController", bundle: nil)
         default:break
         }
         self.navigationController?.pushViewController(vc, animated: true)

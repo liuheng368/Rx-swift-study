@@ -19,6 +19,9 @@
 		0279056A22EEFBB60005333B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0279056822EEFBB60005333B /* Main.storyboard */; };
 		0279056C22EEFBB70005333B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0279056B22EEFBB70005333B /* Assets.xcassets */; };
 		0279056F22EEFBB70005333B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0279056D22EEFBB70005333B /* LaunchScreen.storyboard */; };
+		02AEB0B92383ED680011791D /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEB0B72383ED680011791D /* UploadViewController.swift */; };
+		02AEB0BA2383ED680011791D /* UploadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02AEB0B82383ED680011791D /* UploadViewController.xib */; };
+		02AEB0BC2383EE730011791D /* eBook.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 02AEB0BB2383EE730011791D /* eBook.pdf */; };
 		02C14EA3230E977F00328B26 /* UINavigationItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C14EA2230E977F00328B26 /* UINavigationItem+Extension.swift */; };
 		02E64EC5230E74D90023EC65 /* RxDataSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E64EC4230E74D90023EC65 /* RxDataSourceViewController.swift */; };
 		02EE691F23015D1800DE893E /* TableViewSimpleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EE691D23015D1800DE893E /* TableViewSimpleViewController.swift */; };
@@ -50,6 +53,9 @@
 		0279056B22EEFBB70005333B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0279056E22EEFBB70005333B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0279057022EEFBB70005333B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		02AEB0B72383ED680011791D /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
+		02AEB0B82383ED680011791D /* UploadViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadViewController.xib; sourceTree = "<group>"; };
+		02AEB0BB2383EE730011791D /* eBook.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = eBook.pdf; sourceTree = "<group>"; };
 		02C14EA2230E977F00328B26 /* UINavigationItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+Extension.swift"; sourceTree = "<group>"; };
 		02E64EC4230E74D90023EC65 /* RxDataSourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxDataSourceViewController.swift; sourceTree = "<group>"; };
 		02EE691D23015D1800DE893E /* TableViewSimpleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSimpleViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +91,8 @@
 				0266EFF9237EB34800825885 /* SessionViewController.swift */,
 				0266EFFA237EB34800825885 /* SessionViewController.xib */,
 				0266EFFD2382AAC300825885 /* SessionTableViewController.swift */,
+				02AEB0B72383ED680011791D /* UploadViewController.swift */,
+				02AEB0B82383ED680011791D /* UploadViewController.xib */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -111,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				0279056D22EEFBB70005333B /* LaunchScreen.storyboard */,
+				02AEB0BB2383EE730011791D /* eBook.pdf */,
 				022145A322F0462B00CD51E2 /* RxSwift核心.playground */,
 				02EE69252302961800DE893E /* Extension */,
 				02EE692123015D4800DE893E /* TableView */,
@@ -256,7 +265,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				02EE693223040CCF00DE893E /* ButtonViewController.xib in Resources */,
+				02AEB0BA2383ED680011791D /* UploadViewController.xib in Resources */,
 				02EE692023015D1800DE893E /* TableViewSimpleViewController.xib in Resources */,
+				02AEB0BC2383EE730011791D /* eBook.pdf in Resources */,
 				02EE692D2303E8AF00DE893E /* TextFieldsViewController.xib in Resources */,
 				0279056F22EEFBB70005333B /* LaunchScreen.storyboard in Resources */,
 				0279056C22EEFBB70005333B /* Assets.xcassets in Resources */,
@@ -316,6 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02EE69272302963000DE893E /* Label+fontSize.swift in Sources */,
+				02AEB0B92383ED680011791D /* UploadViewController.swift in Sources */,
 				02F100982350322A005C8DDD /* CollectionSimpleViewController.swift in Sources */,
 				025F9733230BCADC00B73BB9 /* Operators.swift in Sources */,
 				02EE693123040CCF00DE893E /* ButtonViewController.swift in Sources */,

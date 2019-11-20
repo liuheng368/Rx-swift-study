@@ -36,7 +36,7 @@ class RxDataSourceViewController: UIViewController {
             cell?.textLabel?.text = "第:\(indexpath.row),\(ele)"
             return cell!
         })
-
+        
         randomResult
             .bind(to: tvMain.rx.items(dataSource: dataS))
             .disposed(by: disposeBag)
@@ -50,7 +50,6 @@ class RxDataSourceViewController: UIViewController {
         tvMain.rx.itemDeselected
             .subscribe {_ in}
             .disposed(by: disposeBag)
-        
         //设置代理
         tvMain.rx.setDelegate(self)
             .disposed(by: disposeBag)

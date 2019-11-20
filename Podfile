@@ -2,14 +2,15 @@
 # platform :ios, '9.0'
 
 target 'RxSwift-test' do
-  # Comment the next line if you don't want to use dynamic frameworks
+
   use_frameworks!
      pod 'RxSwift'
      pod 'RxCocoa'
      pod 'RxDataSources'
+     pod 'RxAlamofire'
      pod 'MLeaksFinder'
      pod 'CleanJSON'
-
+     pod 'Alamofire'
 end
 
 post_install do |installer|

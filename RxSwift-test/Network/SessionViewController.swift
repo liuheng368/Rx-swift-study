@@ -9,6 +9,8 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxAlamofire
+import CleanJSON
 
 class SessionViewController: UIViewController {
 
@@ -20,17 +22,17 @@ class SessionViewController: UIViewController {
         _ = btnSimple.rx.tap.subscribe(onNext: { (_) in
             if let url = URL(string: "https://www.douban.com/j/app/radio/channels"){
                 let req = URLRequest(url: url)
-                _ = URLSession.shared.rx.response(request: req).subscribe { event in
-                    if let ele = event.element {
-                        if 200..<300 ~= ele.response.statusCode {
-                            if let str = String(bytes: ele.data, encoding: .utf8){
-                                print(str)
-                            }
-                        }else{
-                            print("请求失败！")
-                        }
-                    }
-                }
+                _ = requestData(req)
+                    .compactMap { (_,data) in try! CleanJSONDecoder().decode(SessionModel.self, from: data) }
+                    .subscribe(onNext: { (model) in
+                        model.channels.forEach { print($0) }
+                    }, onError: { (err) in
+                        print("请求失败！错误原因：", err)
+                    }, onCompleted: {
+                        print("请求完成")
+                    }, onDisposed: {
+                        print("信号终止")
+                    })
             }
         })
         
@@ -52,20 +54,27 @@ class SessionViewController: UIViewController {
             }
         })
         
-        _ = btnHandle.rx.tap.asObservable().flatMap({ (_) -> Observable<Data> in
-            guard let url = URL(string: "https://github.com/liuheng368/TakeTime.git") else{return Observable<Data>.empty()}
-            let req = URLRequest(url: url)
-            return URLSession.shared.rx.data(request: req)
-                .takeUntil(self.btnCanle.rx.tap)
-        }).subscribe(onNext: {
-            data in
-            let str = String(data: data, encoding: String.Encoding.utf8)
-            print("请求成功！返回的数据是：", str ?? "")
-        }, onError: { error in
-            //手动取消并不会产生消息
-            print("请求失败！错误原因：", error)
-        }).disposed(by: disposeBag)
-        
+        _ = btnHandle.rx.tap.asObservable()
+            .flatMap({ (_) -> Observable<Data> in
+                guard let url = URL(string: "https://www.douban.com/j/app/radio/channels") else{return Observable<Data>.empty()}
+                let req = URLRequest(url: url)
+                return URLSession.shared.rx.data(request: req)
+                    .takeUntil(self.btnCanle.rx.tap)
+                    .catchError { _ in Observable.empty()}
+            })
+            .share(replay: 1)
+            .subscribe(onNext: {
+                data in
+                let str = String(data: data, encoding: String.Encoding.utf8)
+                print("请求成功！返回的数据是：", str ?? "")
+            }, onError: { error in
+                //手动取消并不会产生消息
+                print("请求失败！错误原因：", error)
+            }, onCompleted: {
+                print("完成")
+            }, onDisposed: {
+                print("信号终止")
+            }).disposed(by: disposeBag)
         
     }
     
