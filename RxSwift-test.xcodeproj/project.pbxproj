@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		022EBD5B238E75BC0082022C /* DouBanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022EBD59238E75BC0082022C /* DouBanTableViewCell.swift */; };
 		022EBD5C238E75BC0082022C /* DouBanTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 022EBD5A238E75BC0082022C /* DouBanTableViewCell.xib */; };
+		022EBD5F238E7CA90082022C /* MVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022EBD5E238E7CA90082022C /* MVVMViewController.swift */; };
+		022EBD61238E7FD40082022C /* MVVMModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022EBD60238E7FD40082022C /* MVVMModel.swift */; };
+		022EBD63238E838B0082022C /* MVVMViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022EBD62238E838B0082022C /* MVVMViewModel.swift */; };
 		025F9733230BCADC00B73BB9 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F9732230BCADC00B73BB9 /* Operators.swift */; };
 		025F9735230BE23100B73BB9 /* TapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F9734230BE23100B73BB9 /* TapViewController.swift */; };
 		025F973A230BF4CD00B73BB9 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F9738230BF4CD00B73BB9 /* DatePickerViewController.swift */; };
@@ -46,6 +49,9 @@
 		022145A322F0462B00CD51E2 /* RxSwift核心.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "RxSwift核心.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		022EBD59238E75BC0082022C /* DouBanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DouBanTableViewCell.swift; sourceTree = "<group>"; };
 		022EBD5A238E75BC0082022C /* DouBanTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DouBanTableViewCell.xib; sourceTree = "<group>"; };
+		022EBD5E238E7CA90082022C /* MVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVMViewController.swift; sourceTree = "<group>"; };
+		022EBD60238E7FD40082022C /* MVVMModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVMModel.swift; sourceTree = "<group>"; };
+		022EBD62238E838B0082022C /* MVVMViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVMViewModel.swift; sourceTree = "<group>"; };
 		025F9732230BCADC00B73BB9 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		025F9734230BE23100B73BB9 /* TapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapViewController.swift; sourceTree = "<group>"; };
 		025F9738230BF4CD00B73BB9 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +101,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		022EBD5D238E7C8E0082022C /* MVVM */ = {
+			isa = PBXGroup;
+			children = (
+				022EBD5E238E7CA90082022C /* MVVMViewController.swift */,
+				022EBD60238E7FD40082022C /* MVVMModel.swift */,
+				022EBD62238E838B0082022C /* MVVMViewModel.swift */,
+			);
+			path = MVVM;
+			sourceTree = "<group>";
+		};
 		0266EFF4237E8B7B00825885 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +154,7 @@
 				02EE692E23040C5E00DE893E /* UIControl */,
 				0266EFF4237E8B7B00825885 /* Network */,
 				02CCF199238D32CD001307CC /* Moya */,
+				022EBD5D238E7C8E0082022C /* MVVM */,
 				0279056422EEFBB60005333B /* AppDelegate.swift */,
 				0279056622EEFBB60005333B /* ViewController.swift */,
 				0279056822EEFBB60005333B /* Main.storyboard */,
@@ -356,6 +373,7 @@
 				02F100982350322A005C8DDD /* CollectionSimpleViewController.swift in Sources */,
 				025F9733230BCADC00B73BB9 /* Operators.swift in Sources */,
 				02EE693123040CCF00DE893E /* ButtonViewController.swift in Sources */,
+				022EBD5F238E7CA90082022C /* MVVMViewController.swift in Sources */,
 				0279056722EEFBB60005333B /* ViewController.swift in Sources */,
 				025F973A230BF4CD00B73BB9 /* DatePickerViewController.swift in Sources */,
 				02EE692C2303E8AF00DE893E /* TextFieldsViewController.swift in Sources */,
@@ -365,9 +383,11 @@
 				0266EFFB237EB34800825885 /* SessionViewController.swift in Sources */,
 				02C14EA3230E977F00328B26 /* UINavigationItem+Extension.swift in Sources */,
 				02CCF19D238D36A2001307CC /* DouBanViewController.swift in Sources */,
+				022EBD63238E838B0082022C /* MVVMViewModel.swift in Sources */,
 				02EE692323015D6900DE893E /* TableViewSimpleVVM.swift in Sources */,
 				0266EFFE2382AAC300825885 /* SessionTableViewController.swift in Sources */,
 				02EE691F23015D1800DE893E /* TableViewSimpleViewController.swift in Sources */,
+				022EBD61238E7FD40082022C /* MVVMModel.swift in Sources */,
 				02F35C84237C1961001AE5B8 /* PickViewViewController.swift in Sources */,
 				02CCF198238D3240001307CC /* MoyaProvider+Rx.swift in Sources */,
 				025F9735230BE23100B73BB9 /* TapViewController.swift in Sources */,

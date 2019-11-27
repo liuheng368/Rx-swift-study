@@ -27,7 +27,8 @@ class ViewController: UIViewController,UITableViewDelegate {
                "SessionViewController",
                "SessionTableViewController",
                "UploadViewController",
-               "DouBanViewController"]
+               "DouBanViewController",
+               "MVVMViewController"]
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -56,6 +57,8 @@ class ViewController: UIViewController,UITableViewDelegate {
             vc = UploadViewController(nibName: "UploadViewController", bundle: nil)
         case 10:
             vc = DouBanViewController()
+        case 11:
+            vc = MVVMViewController()
         default:break
         }
         self.navigationController?.pushViewController(vc, animated: true)

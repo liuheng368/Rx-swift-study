@@ -17,6 +17,7 @@ public extension Reactive where Base: MoyaProviderType {
             let cancellableToken = base?.request(token, callbackQueue: callbackQueue, progress: nil) { result in
                 switch result {
                 case let .success(response):
+                    print(try! JSONSerialization.jsonObject(with: response.data))
                     single(.success(response))
                 case let .failure(error):
                     single(.error(error))

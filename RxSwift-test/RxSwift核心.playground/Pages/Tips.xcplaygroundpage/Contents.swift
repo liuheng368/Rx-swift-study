@@ -15,4 +15,5 @@ Observable.of("2", "3")
 //RxSwift.Resources.total我们可以查看当前RxSwift申请的所有资源数量
 print(RxSwift.Resources.total)
 
+// 被merge()过的signal无法再次被merge()后触发
 //: [Next](@next)
