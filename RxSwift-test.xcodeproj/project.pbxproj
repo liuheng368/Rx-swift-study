@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		022EBD5B238E75BC0082022C /* DouBanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022EBD59238E75BC0082022C /* DouBanTableViewCell.swift */; };
+		022EBD5C238E75BC0082022C /* DouBanTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 022EBD5A238E75BC0082022C /* DouBanTableViewCell.xib */; };
 		025F9733230BCADC00B73BB9 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F9732230BCADC00B73BB9 /* Operators.swift */; };
 		025F9735230BE23100B73BB9 /* TapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F9734230BE23100B73BB9 /* TapViewController.swift */; };
 		025F973A230BF4CD00B73BB9 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F9738230BF4CD00B73BB9 /* DatePickerViewController.swift */; };
@@ -42,6 +44,8 @@
 
 /* Begin PBXFileReference section */
 		022145A322F0462B00CD51E2 /* RxSwift核心.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "RxSwift核心.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		022EBD59238E75BC0082022C /* DouBanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DouBanTableViewCell.swift; sourceTree = "<group>"; };
+		022EBD5A238E75BC0082022C /* DouBanTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DouBanTableViewCell.xib; sourceTree = "<group>"; };
 		025F9732230BCADC00B73BB9 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		025F9734230BE23100B73BB9 /* TapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapViewController.swift; sourceTree = "<group>"; };
 		025F9738230BF4CD00B73BB9 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 			isa = PBXGroup;
 			children = (
 				02CCF19C238D36A2001307CC /* DouBanViewController.swift */,
+				022EBD59238E75BC0082022C /* DouBanTableViewCell.swift */,
+				022EBD5A238E75BC0082022C /* DouBanTableViewCell.xib */,
 				02CCF19A238D330A001307CC /* DouBanModel.swift */,
 			);
 			path = Moya;
@@ -282,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02EE693223040CCF00DE893E /* ButtonViewController.xib in Resources */,
+				022EBD5C238E75BC0082022C /* DouBanTableViewCell.xib in Resources */,
 				02AEB0BA2383ED680011791D /* UploadViewController.xib in Resources */,
 				02EE692023015D1800DE893E /* TableViewSimpleViewController.xib in Resources */,
 				02AEB0BC2383EE730011791D /* eBook.pdf in Resources */,
@@ -344,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02EE69272302963000DE893E /* Label+fontSize.swift in Sources */,
+				022EBD5B238E75BC0082022C /* DouBanTableViewCell.swift in Sources */,
 				02AEB0B92383ED680011791D /* UploadViewController.swift in Sources */,
 				02F100982350322A005C8DDD /* CollectionSimpleViewController.swift in Sources */,
 				025F9733230BCADC00B73BB9 /* Operators.swift in Sources */,

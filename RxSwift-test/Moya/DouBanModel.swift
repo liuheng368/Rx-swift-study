@@ -59,3 +59,12 @@ extension DoubanModel : TargetType {
         return "{}".data(using: String.Encoding.utf8)!
     }
 }
+
+struct ChannelModel : Codable {
+    var song: [Song]
+    
+    struct Song: Codable {
+        var title: String
+        var artist:String
+    }
+}
