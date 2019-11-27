@@ -23,6 +23,9 @@
 		02AEB0BA2383ED680011791D /* UploadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02AEB0B82383ED680011791D /* UploadViewController.xib */; };
 		02AEB0BC2383EE730011791D /* eBook.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 02AEB0BB2383EE730011791D /* eBook.pdf */; };
 		02C14EA3230E977F00328B26 /* UINavigationItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C14EA2230E977F00328B26 /* UINavigationItem+Extension.swift */; };
+		02CCF198238D3240001307CC /* MoyaProvider+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCF197238D3240001307CC /* MoyaProvider+Rx.swift */; };
+		02CCF19B238D330A001307CC /* DouBanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCF19A238D330A001307CC /* DouBanModel.swift */; };
+		02CCF19D238D36A2001307CC /* DouBanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCF19C238D36A2001307CC /* DouBanViewController.swift */; };
 		02E64EC5230E74D90023EC65 /* RxDataSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E64EC4230E74D90023EC65 /* RxDataSourceViewController.swift */; };
 		02EE691F23015D1800DE893E /* TableViewSimpleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EE691D23015D1800DE893E /* TableViewSimpleViewController.swift */; };
 		02EE692023015D1800DE893E /* TableViewSimpleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02EE691E23015D1800DE893E /* TableViewSimpleViewController.xib */; };
@@ -57,6 +60,9 @@
 		02AEB0B82383ED680011791D /* UploadViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadViewController.xib; sourceTree = "<group>"; };
 		02AEB0BB2383EE730011791D /* eBook.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = eBook.pdf; sourceTree = "<group>"; };
 		02C14EA2230E977F00328B26 /* UINavigationItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+Extension.swift"; sourceTree = "<group>"; };
+		02CCF197238D3240001307CC /* MoyaProvider+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MoyaProvider+Rx.swift"; sourceTree = "<group>"; };
+		02CCF19A238D330A001307CC /* DouBanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DouBanModel.swift; sourceTree = "<group>"; };
+		02CCF19C238D36A2001307CC /* DouBanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DouBanViewController.swift; sourceTree = "<group>"; };
 		02E64EC4230E74D90023EC65 /* RxDataSourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxDataSourceViewController.swift; sourceTree = "<group>"; };
 		02EE691D23015D1800DE893E /* TableViewSimpleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSimpleViewController.swift; sourceTree = "<group>"; };
 		02EE691E23015D1800DE893E /* TableViewSimpleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewSimpleViewController.xib; sourceTree = "<group>"; };
@@ -127,6 +133,7 @@
 				02EE69292303E87800DE893E /* UITextField&UITextView */,
 				02EE692E23040C5E00DE893E /* UIControl */,
 				0266EFF4237E8B7B00825885 /* Network */,
+				02CCF199238D32CD001307CC /* Moya */,
 				0279056422EEFBB60005333B /* AppDelegate.swift */,
 				0279056622EEFBB60005333B /* ViewController.swift */,
 				0279056822EEFBB60005333B /* Main.storyboard */,
@@ -134,6 +141,15 @@
 				0279057022EEFBB70005333B /* Info.plist */,
 			);
 			path = "RxSwift-test";
+			sourceTree = "<group>";
+		};
+		02CCF199238D32CD001307CC /* Moya */ = {
+			isa = PBXGroup;
+			children = (
+				02CCF19C238D36A2001307CC /* DouBanViewController.swift */,
+				02CCF19A238D330A001307CC /* DouBanModel.swift */,
+			);
+			path = Moya;
 			sourceTree = "<group>";
 		};
 		02EE692123015D4800DE893E /* TableView */ = {
@@ -150,6 +166,7 @@
 		02EE69252302961800DE893E /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				02CCF197238D3240001307CC /* MoyaProvider+Rx.swift */,
 				025F9732230BCADC00B73BB9 /* Operators.swift */,
 				02EE69262302963000DE893E /* Label+fontSize.swift */,
 				02C14EA2230E977F00328B26 /* UINavigationItem+Extension.swift */,
@@ -336,12 +353,15 @@
 				02EE692C2303E8AF00DE893E /* TextFieldsViewController.swift in Sources */,
 				02E64EC5230E74D90023EC65 /* RxDataSourceViewController.swift in Sources */,
 				0279056522EEFBB60005333B /* AppDelegate.swift in Sources */,
+				02CCF19B238D330A001307CC /* DouBanModel.swift in Sources */,
 				0266EFFB237EB34800825885 /* SessionViewController.swift in Sources */,
 				02C14EA3230E977F00328B26 /* UINavigationItem+Extension.swift in Sources */,
+				02CCF19D238D36A2001307CC /* DouBanViewController.swift in Sources */,
 				02EE692323015D6900DE893E /* TableViewSimpleVVM.swift in Sources */,
 				0266EFFE2382AAC300825885 /* SessionTableViewController.swift in Sources */,
 				02EE691F23015D1800DE893E /* TableViewSimpleViewController.swift in Sources */,
 				02F35C84237C1961001AE5B8 /* PickViewViewController.swift in Sources */,
+				02CCF198238D3240001307CC /* MoyaProvider+Rx.swift in Sources */,
 				025F9735230BE23100B73BB9 /* TapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,7 +439,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -474,7 +494,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

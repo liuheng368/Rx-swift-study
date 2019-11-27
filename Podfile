@@ -11,6 +11,8 @@ target 'RxSwift-test' do
      pod 'MLeaksFinder'
      pod 'CleanJSON'
      pod 'Alamofire'
+     pod 'Moya'
+#pod 'Moya/RxSwift','~>13.0'
 end
 
 post_install do |installer|
