@@ -23,6 +23,7 @@ class DouBanViewController: UIViewController {
         }) { (err) in
             print(err)
         }.disposed(by: disposeBag)
+        
     }
     
     func loadChannels() -> Observable<SessionModel> {
