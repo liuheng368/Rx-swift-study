@@ -27,14 +27,15 @@ class MVVMViewController: UIViewController {
         
         let searchAction = searchBar.rx.text
             .orEmpty
-            .throttle(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
+            .asDriver()
+            .throttle(RxTimeInterval.milliseconds(500))
             .distinctUntilChanged()
-            .asObservable()
-        let viewModel = MVVMViewModel(searchAction_: searchAction)
-        viewModel.navigationTitle
-            .bind(to: navigationItem.rx.title).disposed(by: disposeBag)
         
-        viewModel.repositories.bind(to: tableView.rx.items) {(tableView, row, element) in
+        let viewModel = MVVMViewModel(searchAction_: searchAction)
+        
+        viewModel.navigationTitle.drive(navigationItem.rx.title).disposed(by: disposeBag)
+
+        viewModel.repositories.drive(tableView.rx.items) {(tableView, row, element) in
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellId")!
             cell.textLabel?.text = element.name
             cell.detailTextLabel?.text = element.htmlUrl

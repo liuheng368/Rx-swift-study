@@ -6,17 +6,18 @@
 //  Copyright © 2019 刘恒. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import RxSwift
+import RxCocoa
 import CleanJSON
 
 class MVVMService {
      
-    func searchRepositories(_ query:String) -> Observable<MVVMModel>{
+    func searchRepositories(_ query:String) -> Driver<MVVMModel>{
         return GitHubProvider.rx.request(.repositories(query))
-            .asObservable()
+            .filterSuccessfulStatusCodes().asObservable()
             .compactMap { try! CleanJSONDecoder().decode(MVVMModel.self, from: $0.data)}
-            .catchError { _ in Observable<MVVMModel>.empty() }
+            .asDriver(onErrorRecover: {_ in Driver.empty()})
     }
 }
 
@@ -24,32 +25,34 @@ class MVVMViewModel {
     
     let networkService = MVVMService()
     
-    fileprivate let searchAction:Observable<String>
+    fileprivate let searchAction:Driver<String>
     
-    let searchResult: Observable<MVVMModel>
+    let searchResult: Driver<MVVMModel>
     
-    let repositories : Observable<[MVVMModel.GitHubRepository]>
+    let repositories : Driver<[MVVMModel.GitHubRepository]>
     
-    let cleanResult : Observable<Void>
+    let cleanResult : Driver<Void>
     
-    let navigationTitle: Observable<String>
+    let navigationTitle: Driver<String>
     
     
-    init(searchAction_ : Observable<String>) {
+    init(searchAction_ : Driver<String>) {
         self.searchAction = searchAction_
-        
+            
         self.searchResult = searchAction_
-            .filter{!$0.isEmpty}
+            .filter{
+                !$0.isEmpty}
             .flatMapLatest(networkService.searchRepositories)
         
         self.cleanResult = searchAction_
-            .filter{ $0.isEmpty }
+            .filter{
+                $0.isEmpty }
             .map{_ in Void() }
         
-        self.repositories = Observable.of(searchResult.map{$0.items},
-                                          cleanResult.map{[]}).merge()
+        self.repositories = Driver.of(searchResult.map{$0.items},
+                                      cleanResult.map{[]}).merge()
         
-        self.navigationTitle = Observable.of(searchResult.map{"共有 \($0.total_count) 个结果"},
-                                             cleanResult.map{"henry"}).merge()
+        self.navigationTitle = Driver.merge(searchResult.map{"共有 \($0.total_count) 个结果"},
+                                            cleanResult.map{"henry"})
     }
 }

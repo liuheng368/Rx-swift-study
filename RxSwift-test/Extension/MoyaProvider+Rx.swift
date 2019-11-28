@@ -61,3 +61,11 @@ public extension Reactive where Base: MoyaProviderType {
         }
     }
 }
+
+extension PrimitiveSequence where Trait == SingleTrait, Element == Response {
+    public func filterSuccessfulStatusCodes() -> Single<Element> {
+        return flatMap { (e) -> Single<Element> in
+            Single.just(try e.filterSuccessfulStatusCodes())
+        }
+    }
+}
