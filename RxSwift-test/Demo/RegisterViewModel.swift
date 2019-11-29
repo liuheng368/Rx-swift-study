@@ -56,6 +56,7 @@ class RegisterViewModel {
     let passWordAgainVer:Driver<ValidationResult>
     let registerVer:Driver<Bool>
     let registerNetWork:Driver<Bool>
+    let netWorking:Driver<Bool>
 
     lazy var server = RegisterService()
     init(nameAction:Driver<String>,
@@ -72,12 +73,17 @@ class RegisterViewModel {
         registerVer = Driver.combineLatest(nameVer,passWordVer,passWordAgainVer)
             .map { $0.isAble && $1.isAble && $2.isAble}
         
+        let activityIndicator = ActivityIndicator()
+        netWorking = activityIndicator.asDriver()
+        
         let usernameAndPassword = Driver.combineLatest(nameAction, passWordAction).map{($0,$1)}
         registerNetWork = registerAction
 //            .withLatestFrom(usernameAndPassword)
             .flatMap{_ in usernameAndPassword}
             .flatMapLatest { (w,p) in
                 return service.singup(w, p)
-        }.asDriver(onErrorJustReturn: false)
+                    .trackActivity(activityIndicator)
+                    .asDriver(onErrorJustReturn: false)
+        }
     }
 }

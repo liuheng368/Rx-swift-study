@@ -28,6 +28,7 @@
 		0279056A22EEFBB60005333B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0279056822EEFBB60005333B /* Main.storyboard */; };
 		0279056C22EEFBB70005333B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0279056B22EEFBB70005333B /* Assets.xcassets */; };
 		0279056F22EEFBB70005333B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0279056D22EEFBB70005333B /* LaunchScreen.storyboard */; };
+		029B32B42390B6180018AEE6 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029B32B32390B6180018AEE6 /* ActivityIndicator.swift */; };
 		02AEB0B92383ED680011791D /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEB0B72383ED680011791D /* UploadViewController.swift */; };
 		02AEB0BA2383ED680011791D /* UploadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02AEB0B82383ED680011791D /* UploadViewController.xib */; };
 		02AEB0BC2383EE730011791D /* eBook.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 02AEB0BB2383EE730011791D /* eBook.pdf */; };
@@ -74,6 +75,7 @@
 		0279056B22EEFBB70005333B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0279056E22EEFBB70005333B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0279057022EEFBB70005333B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		029B32B32390B6180018AEE6 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		02AEB0B72383ED680011791D /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		02AEB0B82383ED680011791D /* UploadViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadViewController.xib; sourceTree = "<group>"; };
 		02AEB0BB2383EE730011791D /* eBook.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = eBook.pdf; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 		02EE69252302961800DE893E /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				029B32B32390B6180018AEE6 /* ActivityIndicator.swift */,
 				02CCF197238D3240001307CC /* MoyaProvider+Rx.swift */,
 				025F9732230BCADC00B73BB9 /* Operators.swift */,
 				02EE69262302963000DE893E /* Label+fontSize.swift */,
@@ -392,6 +395,7 @@
 				02EE69272302963000DE893E /* Label+fontSize.swift in Sources */,
 				022EBD5B238E75BC0082022C /* DouBanTableViewCell.swift in Sources */,
 				02AEB0B92383ED680011791D /* UploadViewController.swift in Sources */,
+				029B32B42390B6180018AEE6 /* ActivityIndicator.swift in Sources */,
 				02F100982350322A005C8DDD /* CollectionSimpleViewController.swift in Sources */,
 				025F9733230BCADC00B73BB9 /* Operators.swift in Sources */,
 				02EE693123040CCF00DE893E /* ButtonViewController.swift in Sources */,

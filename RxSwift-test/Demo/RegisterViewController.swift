@@ -33,6 +33,10 @@ class RegisterViewController: UIViewController {
         vm.registerNetWork.drive(onNext: { (b) in
             print("注册\(b ? "成功" : "失败")")
             }).disposed(by: disposeBag)
+        
+        vm.netWorking.drive(onNext: { (b) in
+            print(b)
+        }).disposed(by: disposeBag)
     }
     
     @IBOutlet weak var tvPassWordAgain: UITextField!
