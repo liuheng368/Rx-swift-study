@@ -16,4 +16,8 @@ Observable.of("2", "3")
 print(RxSwift.Resources.total)
 
 // 被merge()过的signal无法再次被merge()后触发
+
+优点:
+1,没有做数据与View的绑定，没有做到真正的数据驱动视图
+2,对于RxSwift的运用也仅限于网络请求库，RxCocoa的一些优点没有运用到项目
 //: [Next](@next)
