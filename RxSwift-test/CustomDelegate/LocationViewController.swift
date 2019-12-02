@@ -7,27 +7,39 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class LocationViewController: UIViewController {
 
     @IBOutlet weak var btnLocation: UIButton!
     @IBOutlet weak var lblLat: UILabel!
     @IBOutlet weak var lblLng: UILabel!
+    
+    let disposeBag = DisposeBag()
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        GeoLocationService.instance.authorized
+            .drive(btnLocation.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        GeoLocationService.instance.location.drive(onNext: { (cll) in
+            self.lblLat.text = "维度:\(cll.latitude)"
+            self.lblLng.text = "经度:\(cll.longitude)"
+        }).disposed(by: disposeBag)
+        
+        btnLocation.rx.tap.bind {
+            self.openAppPreferences()
+        }.disposed(by: disposeBag)
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    private func openAppPreferences() {
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+        } else {
+            UIApplication.shared.openURL(URL(string: UIApplication.openSettingsURLString)!)
+        }
     }
-    */
 
 }
