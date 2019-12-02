@@ -29,6 +29,9 @@
 		0279056C22EEFBB70005333B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0279056B22EEFBB70005333B /* Assets.xcassets */; };
 		0279056F22EEFBB70005333B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0279056D22EEFBB70005333B /* LaunchScreen.storyboard */; };
 		029B32B42390B6180018AEE6 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029B32B32390B6180018AEE6 /* ActivityIndicator.swift */; };
+		029C12942394266500864E23 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029C12922394266500864E23 /* LocationViewController.swift */; };
+		029C12952394266500864E23 /* LocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 029C12932394266500864E23 /* LocationViewController.xib */; };
+		029C12972394276200864E23 /* RxCLLocationManagerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029C12962394276200864E23 /* RxCLLocationManagerDelegateProxy.swift */; };
 		02AEB0B92383ED680011791D /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEB0B72383ED680011791D /* UploadViewController.swift */; };
 		02AEB0BA2383ED680011791D /* UploadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02AEB0B82383ED680011791D /* UploadViewController.xib */; };
 		02AEB0BC2383EE730011791D /* eBook.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 02AEB0BB2383EE730011791D /* eBook.pdf */; };
@@ -76,6 +79,9 @@
 		0279056E22EEFBB70005333B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0279057022EEFBB70005333B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		029B32B32390B6180018AEE6 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		029C12922394266500864E23 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		029C12932394266500864E23 /* LocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationViewController.xib; sourceTree = "<group>"; };
+		029C12962394276200864E23 /* RxCLLocationManagerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxCLLocationManagerDelegateProxy.swift; sourceTree = "<group>"; };
 		02AEB0B72383ED680011791D /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		02AEB0B82383ED680011791D /* UploadViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadViewController.xib; sourceTree = "<group>"; };
 		02AEB0BB2383EE730011791D /* eBook.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = eBook.pdf; sourceTree = "<group>"; };
@@ -177,6 +183,7 @@
 				02CCF199238D32CD001307CC /* Moya */,
 				022EBD5D238E7C8E0082022C /* MVVM */,
 				022EBD65238FAAF90082022C /* Demo */,
+				029C12912394262E00864E23 /* CustomDelegate */,
 				0279056422EEFBB60005333B /* AppDelegate.swift */,
 				0279056622EEFBB60005333B /* ViewController.swift */,
 				0279056822EEFBB60005333B /* Main.storyboard */,
@@ -184,6 +191,16 @@
 				0279057022EEFBB70005333B /* Info.plist */,
 			);
 			path = "RxSwift-test";
+			sourceTree = "<group>";
+		};
+		029C12912394262E00864E23 /* CustomDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				029C12922394266500864E23 /* LocationViewController.swift */,
+				029C12932394266500864E23 /* LocationViewController.xib */,
+				029C12962394276200864E23 /* RxCLLocationManagerDelegateProxy.swift */,
+			);
+			path = CustomDelegate;
 			sourceTree = "<group>";
 		};
 		02CCF199238D32CD001307CC /* Moya */ = {
@@ -330,6 +347,7 @@
 				02EE693223040CCF00DE893E /* ButtonViewController.xib in Resources */,
 				022EBD6E238FB06D0082022C /* RegisterViewController.xib in Resources */,
 				022EBD5C238E75BC0082022C /* DouBanTableViewCell.xib in Resources */,
+				029C12952394266500864E23 /* LocationViewController.xib in Resources */,
 				02AEB0BA2383ED680011791D /* UploadViewController.xib in Resources */,
 				02EE692023015D1800DE893E /* TableViewSimpleViewController.xib in Resources */,
 				02AEB0BC2383EE730011791D /* eBook.pdf in Resources */,
@@ -404,10 +422,12 @@
 				025F973A230BF4CD00B73BB9 /* DatePickerViewController.swift in Sources */,
 				02EE692C2303E8AF00DE893E /* TextFieldsViewController.swift in Sources */,
 				02E64EC5230E74D90023EC65 /* RxDataSourceViewController.swift in Sources */,
+				029C12972394276200864E23 /* RxCLLocationManagerDelegateProxy.swift in Sources */,
 				0279056522EEFBB60005333B /* AppDelegate.swift in Sources */,
 				02CCF19B238D330A001307CC /* DouBanModel.swift in Sources */,
 				0266EFFB237EB34800825885 /* SessionViewController.swift in Sources */,
 				02C14EA3230E977F00328B26 /* UINavigationItem+Extension.swift in Sources */,
+				029C12942394266500864E23 /* LocationViewController.swift in Sources */,
 				02CCF19D238D36A2001307CC /* DouBanViewController.swift in Sources */,
 				0272EB90238FBB67004D9266 /* RegisterModel.swift in Sources */,
 				022EBD63238E838B0082022C /* MVVMViewModel.swift in Sources */,
