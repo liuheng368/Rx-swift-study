@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PickImageViewController" customModule="RxSwift_test" customModuleProvider="target">
+            <connections>
+                <outlet property="btnChip" destination="uI0-rD-8bS" id="TiS-ct-grP"/>
+                <outlet property="btnPhoto" destination="QwY-aC-H1s" id="MJa-QV-Z05"/>
+                <outlet property="btnPicture" destination="RSc-Fu-ZoC" id="ETc-jh-ZGg"/>
+                <outlet property="ivImage" destination="h7O-OT-IgJ" id="8MV-hQ-9Z3"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QwY-aC-H1s">
+                    <rect key="frame" x="15" y="54" width="31" height="30"/>
+                    <state key="normal" title="拍照"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RSc-Fu-ZoC">
+                    <rect key="frame" x="146" y="54" width="62" height="30"/>
+                    <state key="normal" title="选择照片"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uI0-rD-8bS">
+                    <rect key="frame" x="308" y="54" width="108" height="30"/>
+                    <state key="normal" title="选择照片并裁剪"/>
+                </button>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h7O-OT-IgJ">
+                    <rect key="frame" x="15" y="99" width="384" height="748"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="h7O-OT-IgJ" secondAttribute="trailing" constant="15" id="03b-i7-3ju"/>
+                <constraint firstItem="QwY-aC-H1s" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="H6c-np-Wew"/>
+                <constraint firstItem="h7O-OT-IgJ" firstAttribute="top" secondItem="RSc-Fu-ZoC" secondAttribute="bottom" constant="15" id="Nr7-0W-bNO"/>
+                <constraint firstItem="QwY-aC-H1s" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="OWf-KT-h4S"/>
+                <constraint firstItem="uI0-rD-8bS" firstAttribute="centerY" secondItem="QwY-aC-H1s" secondAttribute="centerY" id="RnX-z0-QrS"/>
+                <constraint firstItem="uI0-rD-8bS" firstAttribute="leading" secondItem="RSc-Fu-ZoC" secondAttribute="trailing" constant="100" id="UPU-oB-ePr"/>
+                <constraint firstItem="RSc-Fu-ZoC" firstAttribute="leading" secondItem="QwY-aC-H1s" secondAttribute="trailing" constant="100" id="ZMM-Om-idn"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="h7O-OT-IgJ" secondAttribute="bottom" constant="15" id="eTM-vF-cjV"/>
+                <constraint firstItem="h7O-OT-IgJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="r5n-eU-9G0"/>
+                <constraint firstItem="RSc-Fu-ZoC" firstAttribute="centerY" secondItem="QwY-aC-H1s" secondAttribute="centerY" id="uTG-Yp-zkW"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="139" y="154"/>
+        </view>
+    </objects>
+</document>

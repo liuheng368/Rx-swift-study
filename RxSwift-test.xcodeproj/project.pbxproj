@@ -34,6 +34,10 @@
 		029C12972394276200864E23 /* RxCLLocationManagerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029C12962394276200864E23 /* RxCLLocationManagerDelegateProxy.swift */; };
 		029C12992394E36400864E23 /* Rx+CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029C12982394E36400864E23 /* Rx+CLLocationManager.swift */; };
 		029C129B2394ECFC00864E23 /* GeoLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029C129A2394ECFC00864E23 /* GeoLocationService.swift */; };
+		029C12A02395195000864E23 /* PickImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029C129E2395195000864E23 /* PickImageViewController.swift */; };
+		029C12A12395195000864E23 /* PickImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 029C129F2395195000864E23 /* PickImageViewController.xib */; };
+		029C12A323951B7400864E23 /* UIImagePcikDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029C12A223951B7400864E23 /* UIImagePcikDelegateProxy.swift */; };
+		029C12A523951F7D00864E23 /* Rx+UIImagePcikController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029C12A423951F7D00864E23 /* Rx+UIImagePcikController.swift */; };
 		02AEB0B92383ED680011791D /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEB0B72383ED680011791D /* UploadViewController.swift */; };
 		02AEB0BA2383ED680011791D /* UploadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02AEB0B82383ED680011791D /* UploadViewController.xib */; };
 		02AEB0BC2383EE730011791D /* eBook.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 02AEB0BB2383EE730011791D /* eBook.pdf */; };
@@ -86,6 +90,10 @@
 		029C12962394276200864E23 /* RxCLLocationManagerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxCLLocationManagerDelegateProxy.swift; sourceTree = "<group>"; };
 		029C12982394E36400864E23 /* Rx+CLLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+CLLocationManager.swift"; sourceTree = "<group>"; };
 		029C129A2394ECFC00864E23 /* GeoLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocationService.swift; sourceTree = "<group>"; };
+		029C129E2395195000864E23 /* PickImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickImageViewController.swift; sourceTree = "<group>"; };
+		029C129F2395195000864E23 /* PickImageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickImageViewController.xib; sourceTree = "<group>"; };
+		029C12A223951B7400864E23 /* UIImagePcikDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImagePcikDelegateProxy.swift; sourceTree = "<group>"; };
+		029C12A423951F7D00864E23 /* Rx+UIImagePcikController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+UIImagePcikController.swift"; sourceTree = "<group>"; };
 		02AEB0B72383ED680011791D /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		02AEB0B82383ED680011791D /* UploadViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadViewController.xib; sourceTree = "<group>"; };
 		02AEB0BB2383EE730011791D /* eBook.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = eBook.pdf; sourceTree = "<group>"; };
@@ -200,13 +208,33 @@
 		029C12912394262E00864E23 /* CustomDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				029C129D2395193F00864E23 /* PickImage */,
+				029C129C2395193400864E23 /* location */,
+			);
+			path = CustomDelegate;
+			sourceTree = "<group>";
+		};
+		029C129C2395193400864E23 /* location */ = {
+			isa = PBXGroup;
+			children = (
 				029C12922394266500864E23 /* LocationViewController.swift */,
 				029C12932394266500864E23 /* LocationViewController.xib */,
 				029C12962394276200864E23 /* RxCLLocationManagerDelegateProxy.swift */,
 				029C12982394E36400864E23 /* Rx+CLLocationManager.swift */,
 				029C129A2394ECFC00864E23 /* GeoLocationService.swift */,
 			);
-			path = CustomDelegate;
+			path = location;
+			sourceTree = "<group>";
+		};
+		029C129D2395193F00864E23 /* PickImage */ = {
+			isa = PBXGroup;
+			children = (
+				029C129E2395195000864E23 /* PickImageViewController.swift */,
+				029C129F2395195000864E23 /* PickImageViewController.xib */,
+				029C12A223951B7400864E23 /* UIImagePcikDelegateProxy.swift */,
+				029C12A423951F7D00864E23 /* Rx+UIImagePcikController.swift */,
+			);
+			path = PickImage;
 			sourceTree = "<group>";
 		};
 		02CCF199238D32CD001307CC /* Moya */ = {
@@ -357,6 +385,7 @@
 				02AEB0BA2383ED680011791D /* UploadViewController.xib in Resources */,
 				02EE692023015D1800DE893E /* TableViewSimpleViewController.xib in Resources */,
 				02AEB0BC2383EE730011791D /* eBook.pdf in Resources */,
+				029C12A12395195000864E23 /* PickImageViewController.xib in Resources */,
 				02EE692D2303E8AF00DE893E /* TextFieldsViewController.xib in Resources */,
 				0279056F22EEFBB70005333B /* LaunchScreen.storyboard in Resources */,
 				0279056C22EEFBB70005333B /* Assets.xcassets in Resources */,
@@ -418,6 +447,7 @@
 				022EBD6F238FB06D0082022C /* RegisterViewController.swift in Sources */,
 				02EE69272302963000DE893E /* Label+fontSize.swift in Sources */,
 				022EBD5B238E75BC0082022C /* DouBanTableViewCell.swift in Sources */,
+				029C12A323951B7400864E23 /* UIImagePcikDelegateProxy.swift in Sources */,
 				02AEB0B92383ED680011791D /* UploadViewController.swift in Sources */,
 				029B32B42390B6180018AEE6 /* ActivityIndicator.swift in Sources */,
 				02F100982350322A005C8DDD /* CollectionSimpleViewController.swift in Sources */,
@@ -433,6 +463,7 @@
 				02CCF19B238D330A001307CC /* DouBanModel.swift in Sources */,
 				0266EFFB237EB34800825885 /* SessionViewController.swift in Sources */,
 				029C12992394E36400864E23 /* Rx+CLLocationManager.swift in Sources */,
+				029C12A02395195000864E23 /* PickImageViewController.swift in Sources */,
 				02C14EA3230E977F00328B26 /* UINavigationItem+Extension.swift in Sources */,
 				029C12942394266500864E23 /* LocationViewController.swift in Sources */,
 				02CCF19D238D36A2001307CC /* DouBanViewController.swift in Sources */,
@@ -441,6 +472,7 @@
 				02EE692323015D6900DE893E /* TableViewSimpleVVM.swift in Sources */,
 				029C129B2394ECFC00864E23 /* GeoLocationService.swift in Sources */,
 				0266EFFE2382AAC300825885 /* SessionTableViewController.swift in Sources */,
+				029C12A523951F7D00864E23 /* Rx+UIImagePcikController.swift in Sources */,
 				02EE691F23015D1800DE893E /* TableViewSimpleViewController.swift in Sources */,
 				022EBD71238FB0770082022C /* RegisterViewModel.swift in Sources */,
 				022EBD61238E7FD40082022C /* MVVMModel.swift in Sources */,
