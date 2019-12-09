@@ -76,6 +76,8 @@ class RegisterViewModel {
         let activityIndicator = ActivityIndicator()
         netWorking = activityIndicator.asDriver()
         
+        
+        
         let usernameAndPassword = Driver.combineLatest(nameAction, passWordAction).map{($0,$1)}
         registerNetWork = registerAction
 //            .withLatestFrom(usernameAndPassword)

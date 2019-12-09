@@ -6,6 +6,12 @@ extension MoyaProvider: ReactiveCompatible {}
 
 public extension Reactive where Base: MoyaProviderType {
 
+    var dis : DisposeBag {
+        get{
+            return DisposeBag()
+        }
+    }
+    
     /// Designated request-making method.
     ///
     /// - Parameters:
@@ -13,7 +19,8 @@ public extension Reactive where Base: MoyaProviderType {
     ///   - callbackQueue: Callback queue. If nil - queue from provider initializer will be used.
     /// - Returns: Single response object.
     func request(_ token: Base.Target, callbackQueue: DispatchQueue? = nil) -> Single<Response> {
-        return Single.create { [weak base] single in
+        
+        return Single<Response>.create { [weak base] single in
             let cancellableToken = base?.request(token, callbackQueue: callbackQueue, progress: nil) { result in
                 switch result {
                 case let .success(response):
@@ -27,7 +34,8 @@ public extension Reactive where Base: MoyaProviderType {
             return Disposables.create {
                 cancellableToken?.cancel()
             }
-        }
+        }.trackActivity(activityIndicator)
+            .asSingle()
     }
 
     /// Designated request-making method with progress.
