@@ -10,6 +10,7 @@ import UIKit
 import Moya
 
 let RegisterPro = MoyaProvider<RegisterModel>()
+
 enum RegisterModel{
     case userNameVer(_ userName:String)
 }

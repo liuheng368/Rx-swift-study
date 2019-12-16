@@ -24,7 +24,6 @@ class MVVMViewController: UIViewController {
         view.addSubview(tableView)
         searchBar.frame.size = CGSize(width: view.frame.width, height: 56)
         tableView.tableHeaderView = searchBar
-        
         let searchAction = searchBar.rx.text
             .orEmpty
             .asDriver()
@@ -32,9 +31,8 @@ class MVVMViewController: UIViewController {
             .distinctUntilChanged()
         
         let viewModel = MVVMViewModel(searchAction_: searchAction)
-        
         viewModel.navigationTitle.drive(navigationItem.rx.title).disposed(by: disposeBag)
-
+        
         viewModel.repositories.drive(tableView.rx.items) {(tableView, row, element) in
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellId")!
             cell.textLabel?.text = element.name

@@ -10,11 +10,12 @@ import Foundation
 import RxSwift
 import RxCocoa
 import CleanJSON
+import Moya
 
 class MVVMService {
-     
+    
     func searchRepositories(_ query:String) -> Driver<MVVMModel>{
-        return GitHubProvider.rx.request(.repositories(query))
+        return GitHubProvider.rx.request(MultiTarget(MVVMApi.repositories(query)))
             .filterSuccessfulStatusCodes().asObservable()
             .compactMap { try! CleanJSONDecoder().decode(MVVMModel.self, from: $0.data)}
             .asDriver(onErrorRecover: {_ in Driver.empty()})

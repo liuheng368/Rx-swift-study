@@ -23,16 +23,37 @@ struct MVVMModel : Codable {
     }
 }
 
-let GitHubProvider = MoyaProvider<MVVMApi>()
+let GitHubProvider = bdMoyaProvider<MultiTarget>()
+
+class bdMoyaProvider<Target: TargetType>: MoyaProvider<Target> {
+    init() {
+//        super.init(plugins: [DDNetworkLoggerPlugin()])
+    }
+}
+
+
+protocol bdTargetType {
+    var bdTask: Task { get }
+}
 
 enum MVVMApi{
     case repositories(_ content:String)
 }
 
+
 extension MVVMApi : TargetType {
     var baseURL: URL {
         return URL(string: "https://api.github.com")!
     }
+    
+    var sampleData: Data {
+        return "{}".data(using: String.Encoding.utf8)!
+    }
+    
+    var headers: [String : String]? {
+        return nil
+    }
+    
     
     var path: String {
         switch self {
@@ -42,25 +63,35 @@ extension MVVMApi : TargetType {
     }
     
     var method: Moya.Method {
-        return .get
+        return .post
     }
     
-    var sampleData: Data {
-        return "{}".data(using: String.Encoding.utf8)!
-    }
     
     var task: Task {
+        
         switch self {
         case .repositories(let str):
             var params: [String: Any] = [:]
             params["q"] = str
-            params["sort"] = "stars"
+            params["sort"] = ["sad","asdad"]
             params["order"] = "desc"
-            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+            return .requestCompositeParameters(bodyParameters: [:],
+                                               bodyEncoding: URLEncoding.httpBody,
+                                               urlParameters: params)
         }
     }
     
-    var headers: [String : String]? {
-        return nil
+}
+
+extension TargetType {
+    var whiteList : [String] {
+        return []
+    }
+    
+    var timeOut : Int {
+        return 30
     }
 }
+
+
+

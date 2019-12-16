@@ -5,12 +5,6 @@ import Moya
 extension MoyaProvider: ReactiveCompatible {}
 
 public extension Reactive where Base: MoyaProviderType {
-
-    var dis : DisposeBag {
-        get{
-            return DisposeBag()
-        }
-    }
     
     /// Designated request-making method.
     ///
@@ -24,7 +18,6 @@ public extension Reactive where Base: MoyaProviderType {
             let cancellableToken = base?.request(token, callbackQueue: callbackQueue, progress: nil) { result in
                 switch result {
                 case let .success(response):
-//                    print(String(data: response.data, encoding: .utf8))
                     single(.success(response))
                 case let .failure(error):
                     single(.error(error))
@@ -34,8 +27,7 @@ public extension Reactive where Base: MoyaProviderType {
             return Disposables.create {
                 cancellableToken?.cancel()
             }
-        }.trackActivity(activityIndicator)
-            .asSingle()
+        }
     }
 
     /// Designated request-making method with progress.
