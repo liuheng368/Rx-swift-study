@@ -52,7 +52,7 @@ public extension Reactive where Base: MoyaProviderType {
                 cancellableToken?.cancel()
             }
         }
-
+ 
         // Accumulate all progress and combine them when the result comes
         return response.scan(ProgressResponse()) { last, progress in
             let progressObject = progress.progressObject ?? last.progressObject

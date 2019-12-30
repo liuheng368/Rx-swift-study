@@ -15,6 +15,9 @@
 		022EBD6E238FB06D0082022C /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 022EBD6C238FB06D0082022C /* RegisterViewController.xib */; };
 		022EBD6F238FB06D0082022C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022EBD6D238FB06D0082022C /* RegisterViewController.swift */; };
 		022EBD71238FB0770082022C /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022EBD70238FB0770082022C /* RegisterViewModel.swift */; };
+		024AA5CA23B9ED4B00B154DF /* BDSuperSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024AA5C823B9ED4B00B154DF /* BDSuperSearchViewController.swift */; };
+		024AA5CB23B9ED4B00B154DF /* BDSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024AA5C923B9ED4B00B154DF /* BDSearchTableViewController.swift */; };
+		024AA5CD23B9ED5C00B154DF /* SearchDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024AA5CC23B9ED5C00B154DF /* SearchDemoViewController.swift */; };
 		025F9733230BCADC00B73BB9 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F9732230BCADC00B73BB9 /* Operators.swift */; };
 		025F9735230BE23100B73BB9 /* TapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F9734230BE23100B73BB9 /* TapViewController.swift */; };
 		025F973A230BF4CD00B73BB9 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F9738230BF4CD00B73BB9 /* DatePickerViewController.swift */; };
@@ -69,6 +72,9 @@
 		022EBD6C238FB06D0082022C /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
 		022EBD6D238FB06D0082022C /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		022EBD70238FB0770082022C /* RegisterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		024AA5C823B9ED4B00B154DF /* BDSuperSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDSuperSearchViewController.swift; sourceTree = "<group>"; };
+		024AA5C923B9ED4B00B154DF /* BDSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDSearchTableViewController.swift; sourceTree = "<group>"; };
+		024AA5CC23B9ED5C00B154DF /* SearchDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDemoViewController.swift; sourceTree = "<group>"; };
 		025F9732230BCADC00B73BB9 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		025F9734230BE23100B73BB9 /* TapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapViewController.swift; sourceTree = "<group>"; };
 		025F9738230BF4CD00B73BB9 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -142,12 +148,23 @@
 		022EBD65238FAAF90082022C /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				024AA5C723B9ED4B00B154DF /* SearchController */,
 				022EBD6D238FB06D0082022C /* RegisterViewController.swift */,
 				022EBD6C238FB06D0082022C /* RegisterViewController.xib */,
 				0272EB8F238FBB67004D9266 /* RegisterModel.swift */,
 				022EBD70238FB0770082022C /* RegisterViewModel.swift */,
 			);
 			path = Demo;
+			sourceTree = "<group>";
+		};
+		024AA5C723B9ED4B00B154DF /* SearchController */ = {
+			isa = PBXGroup;
+			children = (
+				024AA5CC23B9ED5C00B154DF /* SearchDemoViewController.swift */,
+				024AA5C823B9ED4B00B154DF /* BDSuperSearchViewController.swift */,
+				024AA5C923B9ED4B00B154DF /* BDSearchTableViewController.swift */,
+			);
+			path = SearchController;
 			sourceTree = "<group>";
 		};
 		0266EFF4237E8B7B00825885 /* Network */ = {
@@ -448,6 +465,7 @@
 				02EE69272302963000DE893E /* Label+fontSize.swift in Sources */,
 				022EBD5B238E75BC0082022C /* DouBanTableViewCell.swift in Sources */,
 				029C12A323951B7400864E23 /* UIImagePcikDelegateProxy.swift in Sources */,
+				024AA5CB23B9ED4B00B154DF /* BDSearchTableViewController.swift in Sources */,
 				02AEB0B92383ED680011791D /* UploadViewController.swift in Sources */,
 				029B32B42390B6180018AEE6 /* ActivityIndicator.swift in Sources */,
 				02F100982350322A005C8DDD /* CollectionSimpleViewController.swift in Sources */,
@@ -458,6 +476,7 @@
 				025F973A230BF4CD00B73BB9 /* DatePickerViewController.swift in Sources */,
 				02EE692C2303E8AF00DE893E /* TextFieldsViewController.swift in Sources */,
 				02E64EC5230E74D90023EC65 /* RxDataSourceViewController.swift in Sources */,
+				024AA5CD23B9ED5C00B154DF /* SearchDemoViewController.swift in Sources */,
 				029C12972394276200864E23 /* RxCLLocationManagerDelegateProxy.swift in Sources */,
 				0279056522EEFBB60005333B /* AppDelegate.swift in Sources */,
 				02CCF19B238D330A001307CC /* DouBanModel.swift in Sources */,
@@ -466,6 +485,7 @@
 				029C12A02395195000864E23 /* PickImageViewController.swift in Sources */,
 				02C14EA3230E977F00328B26 /* UINavigationItem+Extension.swift in Sources */,
 				029C12942394266500864E23 /* LocationViewController.swift in Sources */,
+				024AA5CA23B9ED4B00B154DF /* BDSuperSearchViewController.swift in Sources */,
 				02CCF19D238D36A2001307CC /* DouBanViewController.swift in Sources */,
 				0272EB90238FBB67004D9266 /* RegisterModel.swift in Sources */,
 				022EBD63238E838B0082022C /* MVVMViewModel.swift in Sources */,

@@ -14,8 +14,9 @@ let DouBanProvider = MoyaProvider<DoubanModel>()
 public enum DoubanModel {
     case channels
     case playList(id:String)
+    case img
 }
-
+//https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576595174694&di=9029613759c8b851d5561d967da5f664&imgtype=0&src=http%3A%2F%2F00.minipic.eastday.com%2F20161222%2F20161222195407_66e9861db58f43ca5d9a53437a400105_3.jpeg
 extension DoubanModel : TargetType {
     public var baseURL: URL {
         switch self {
@@ -23,6 +24,8 @@ extension DoubanModel : TargetType {
             return URL(string: "https://www.douban.com")!
         case .playList(_):
             return URL(string: "https://douban.fm")!
+        case .img:
+            return URL(string: "https://github.com/liuheng368/SwiftNetwork_Henry.git")!
         }
     }
     
@@ -32,6 +35,8 @@ extension DoubanModel : TargetType {
             return "/j/app/radio/channels"
         case .playList(_):
             return "/j/mine/playlist"
+        case .img:
+            return ""
         }
     }
     

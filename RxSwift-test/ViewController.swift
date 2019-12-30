@@ -31,7 +31,8 @@ class ViewController: UIViewController,UITableViewDelegate {
                "MVVMViewController",
                "RegisterViewController",
                "LocationViewController",
-               "PickImageViewController"]
+               "PickImageViewController",
+               "SearchDemoViewController"]
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -68,6 +69,8 @@ class ViewController: UIViewController,UITableViewDelegate {
             vc = LocationViewController()
         case 14:
             vc = PickImageViewController()
+        case 15:
+            vc = SearchDemoViewController()
         default:break
         }
         self.navigationController?.pushViewController(vc, animated: true)

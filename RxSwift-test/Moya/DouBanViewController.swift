@@ -23,6 +23,11 @@ class DouBanViewController: UIViewController {
         tableView.frame = view.frame
         tableView.register(UINib(nibName: DouBanTableViewCellId, bundle: nil), forCellReuseIdentifier: DouBanTableViewCellId)
         view.addSubview(tableView)
+        DouBanProvider
+        DouBanProvider.rx.requestWithProgress(DoubanModel.img).subscribe { (event) in
+            print(event)
+        }.disposed(by: disposeBag)
+        
         
         loadChannels().bind(to: tableView.rx.items(cellIdentifier: DouBanTableViewCellId, cellType: DouBanTableViewCell.self)) {(row,data,cell) in
             cell.title.text = data.name
