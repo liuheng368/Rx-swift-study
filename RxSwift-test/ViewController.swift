@@ -70,7 +70,7 @@ class ViewController: UIViewController,UITableViewDelegate {
         case 14:
             vc = PickImageViewController()
         case 15:
-            vc = SearchDemoViewController()
+            vc = BDSuperSearchViewController()
         default:break
         }
         self.navigationController?.pushViewController(vc, animated: true)

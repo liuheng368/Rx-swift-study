@@ -7,29 +7,81 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-class BDSuperSearchViewController: UISearchController {
+class BDSuperSearchViewController<T:Decodable>: UIViewController {
+ 
+    init(<#parameters#>) {
+        <#statements#>
+    }
+    
+    public var searchUpdateAction: Driver<T>?
+    
+    public var nextPageAction: Driver<T>?
+    
+    public var placeHolder:BehaviorRelay<String> =
+        BehaviorRelay(value: "请输入要查询的内容")
+    
+    public var searchResultsTableView: UITableView {
+        return (searchController.searchResultsController as! BDSearchTableViewController).tableView
+    }
 
-    
-    public init() {
-//        super.init(searchResultsController: BDSearchTableViewController(style: .plain))
-        super.init(searchResultsController: UIViewController())
+    public var searchBar: UISearchBar {
+        return searchController.searchBar
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
+    private lazy var searchController: UISearchController = {
+        let controller = BDSearchTableViewController(style: .plain)
+        let searchC = UISearchController(searchResultsController: controller)
+        if #available(iOS 9.1, *) {
+            searchC.obscuresBackgroundDuringPresentation = false
+        }
+        searchC.dimsBackgroundDuringPresentation = false
+        searchC.searchResultsUpdater = self as? UISearchResultsUpdating
+        #if swift(<11.0)
+        searchC.hidesNavigationBarDuringPresentation = false
+        #endif
+        return searchC
+    }()
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+    let disposeBag = DisposeBag()
     override func viewDidLoad() {
         super.viewDidLoad()
-        definesPresentationContext = true
-        hidesNavigationBarDuringPresentation = true
-        dimsBackgroundDuringPresentation = false
+        view.backgroundColor = UIColor.white
+        configureSearchController()
+        
+        placeHolder.subscribe(onNext: {[unowned self] (str) in
+            self.searchBar.placeholder = str
+        }).disposed(by: disposeBag)
+        
+        //searchUpdate
+        searchBar.rx.text
+            .orEmpty
+            .asDriver()
+            .throttle(RxTimeInterval.milliseconds(500))
+            .distinctUntilChanged()
+            .flatMapLatest{_ in self.searchUpdateAction!}
+            .drive(onNext: <#T##((Decodable) -> Void)?##((Decodable) -> Void)?##(Decodable) -> Void#>, onCompleted: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>, onDisposed: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+                
+        }
+        
     }
-
-//    private var searchResultVC : BDSearchTableViewController
+    
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        searchBar.becomeFirstResponder()
+//    }
+    
+    func configureSearchController() {
+        searchBar.autocapitalizationType = .none
+        
+        if #available(*, iOS 11.0.1) {
+            navigationItem.searchController = searchController
+            navigationItem.hidesSearchBarWhenScrolling = false
+        } else {
+            navigationItem.titleView = searchController.searchBar
+        }
+        definesPresentationContext = true
+        extendedLayoutIncludesOpaqueBars = true
+    }
 }

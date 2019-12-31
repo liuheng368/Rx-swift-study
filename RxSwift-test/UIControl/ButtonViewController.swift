@@ -22,7 +22,7 @@ class ButtonViewController: UIViewController {
     @IBOutlet weak var vStepper: UIStepper!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         buuton.rx.tap
             .subscribe(onNext: {print("subscribe-按钮被点击")})
             .disposed(by: disposeBag)
