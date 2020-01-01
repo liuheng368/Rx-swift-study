@@ -11,14 +11,13 @@ import RxSwift
 import RxCocoa
 
 class BDSuperSearchViewController<T:Decodable>: UIViewController {
- 
-    init(<#parameters#>) {
-        <#statements#>
-    }
     
-    public var searchUpdateAction: Driver<T>?
+    public typealias updateBlock = (_ text:String)->(Driver<[T]>)
+    public typealias nextPageBlock = (_ text:String,_ page:Int)->(Driver<[T]>)
     
-    public var nextPageAction: Driver<T>?
+    public var searchUpdateAction: updateBlock!
+   
+    public var nextPageAction: nextPageBlock?
     
     public var placeHolder:BehaviorRelay<String> =
         BehaviorRelay(value: "请输入要查询的内容")
@@ -46,6 +45,9 @@ class BDSuperSearchViewController<T:Decodable>: UIViewController {
     }()
     
     let disposeBag = DisposeBag()
+    private lazy var searchResult:[T] = []
+    let response = BehaviorRelay<[T]>(value: [])
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -55,17 +57,16 @@ class BDSuperSearchViewController<T:Decodable>: UIViewController {
             self.searchBar.placeholder = str
         }).disposed(by: disposeBag)
         
-        //searchUpdate
-        searchBar.rx.text
-            .orEmpty
-            .asDriver()
-            .throttle(RxTimeInterval.milliseconds(500))
+        searchBar.rx.text.orEmpty
+            .throttle(RxTimeInterval.milliseconds(500), scheduler: MainScheduler())
             .distinctUntilChanged()
-            .flatMapLatest{_ in self.searchUpdateAction!}
-            .drive(onNext: <#T##((Decodable) -> Void)?##((Decodable) -> Void)?##(Decodable) -> Void#>, onCompleted: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>, onDisposed: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
-                
-        }
-        
+            .flatMapLatest(searchUpdateAction)
+            .map { (arr) -> [T] in
+                arr.forEach { self.searchResult.append($0) }
+                return arr}
+            .asDriver(onErrorJustReturn: [])
+            .drive(response)
+            .disposed(by: disposeBag)
     }
     
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
