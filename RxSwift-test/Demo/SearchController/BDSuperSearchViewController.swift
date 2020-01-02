@@ -9,21 +9,24 @@
 import UIKit
 import RxSwift
 import RxCocoa
-
-class BDSuperSearchViewController<T:Decodable>: UIViewController {
+import Moya
+import DDSwiftNetwork
+class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewController {
     
-    public typealias updateBlock = (_ text:String)->(Driver<[T]>)
-    public typealias nextPageBlock = (_ text:String,_ page:Int)->(Driver<[T]>)
+    public typealias updateBlock = (_ text:String)->(Single<[T]>)
+    public typealias nextPageBlock = (_ text:String,_ page:Int)->(Single<[T]>)
     
     public var searchUpdateAction: updateBlock!
    
     public var nextPageAction: nextPageBlock?
     
+    public var cellFactory : ((_ cellIdentifier: String,_ cellType: Cell.Type) -> ((Int, T, Cell) -> Void))?
+    
     public var placeHolder:BehaviorRelay<String> =
         BehaviorRelay(value: "请输入要查询的内容")
     
     public var searchResultsTableView: UITableView {
-        return (searchController.searchResultsController as! BDSearchTableViewController).tableView
+        return (searchController.searchResultsController as! BDSearchResultController).tableView
     }
 
     public var searchBar: UISearchBar {
@@ -31,7 +34,7 @@ class BDSuperSearchViewController<T:Decodable>: UIViewController {
     }
     
     private lazy var searchController: UISearchController = {
-        let controller = BDSearchTableViewController(style: .plain)
+        let controller = BDSearchResultController()
         let searchC = UISearchController(searchResultsController: controller)
         if #available(iOS 9.1, *) {
             searchC.obscuresBackgroundDuringPresentation = false
@@ -43,6 +46,8 @@ class BDSuperSearchViewController<T:Decodable>: UIViewController {
         #endif
         return searchC
     }()
+    
+    private var currentPage : Int = 1
     
     let disposeBag = DisposeBag()
     private lazy var searchResult:[T] = []
@@ -57,17 +62,45 @@ class BDSuperSearchViewController<T:Decodable>: UIViewController {
             self.searchBar.placeholder = str
         }).disposed(by: disposeBag)
         
-        searchBar.rx.text.orEmpty
+        let update : Driver<[T]> = searchBar.rx.text.orEmpty
             .throttle(RxTimeInterval.milliseconds(500), scheduler: MainScheduler())
             .distinctUntilChanged()
-            .flatMapLatest(searchUpdateAction)
-            .map { (arr) -> [T] in
-                arr.forEach { self.searchResult.append($0) }
-                return arr}
+            .flatMapLatest {[weak self] (str) -> Observable<[T]> in
+                guard let network = self?.searchUpdateAction(str) else{
+                    return Observable.empty()
+                }
+                return network.asObservable() }
             .asDriver(onErrorJustReturn: [])
-            .drive(response)
-            .disposed(by: disposeBag)
+            .map {[weak self] arr -> [T]  in
+                guard let `self` = self else{return []}
+                self.searchResult.removeAll()
+                arr.forEach{ self.searchResult.append($0) }
+                return arr
+        }
+        
+        var nextPage : Driver<[T]>?
+        if let nextPageAction = nextPageAction {
+            nextPage = searchResultsTableView.rx
+                .footerView
+                .flatMapLatest {[weak self] (_) -> Observable<[T]> in
+                    guard let `self` = self else{return Observable.empty()}
+                    self.currentPage += 1
+                    let network = nextPageAction(self.searchBar.text ?? "", self.currentPage)
+                    return network.asObservable() }
+                .asDriver(onErrorJustReturn: [])
+                .map {[weak self] arr -> [T] in
+                    guard let `self` = self else{return []}
+                    arr.forEach{ self.searchResult.append($0) }
+                    return arr
+            }
+        }
+        Driver.merge(update, nextPage!)
+            .drive( searchResultsTableView.rx.items(cellFactory!))
+        
+        
     }
+    
+    private var result = BehaviorRelay<[T]>(value: [])
     
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        searchBar.becomeFirstResponder()
@@ -84,5 +117,21 @@ class BDSuperSearchViewController<T:Decodable>: UIViewController {
         }
         definesPresentationContext = true
         extendedLayoutIncludesOpaqueBars = true
+        
+        var tf : UITextField
+        if #available(iOS 13.0, *) {
+            tf = searchBar.searchTextField
+        }else{
+            tf = searchBar.value(forKey: "_searchField") as! UITextField
+        }
+        tf.backgroundColor = UIColor(red:0.95, green:0.95, blue:0.95, alpha:1)
+        tf.layer.cornerRadius = 18
+        tf.layer.masksToBounds = true
+        tf.font = UIFont.systemFont(ofSize: 14)
+        searchBar.sizeToFit()
     }
+}
+
+struct qwe:Decodable {
+    var ss : String
 }

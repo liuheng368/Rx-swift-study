@@ -16,8 +16,8 @@ class SearchDemoViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
-        let vc = BDSuperSearchViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = BDSuperSearchViewController<<#T: Decodable#>>()
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

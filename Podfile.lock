@@ -1,8 +1,35 @@
 PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
   - Alamofire (4.9.1)
   - CleanJSON (1.0.0)
+  - DDSwiftNetwork (0.1.0):
+    - AFNetworking (~> 3.2.1)
+    - Alamofire (~> 4.9.1)
+    - CleanJSON (~> 1.0.0)
+    - MBProgressHUD (~> 1.0.0)
+    - Moya (~> 13.0.1)
+    - Qiniu (~> 7.2.6)
+    - RxCocoa (~> 5.0.1)
+    - RxDataSources (~> 4.0.1)
+    - RxSwift (~> 5.0.1)
   - Differentiator (4.0.1)
   - FBRetainCycleDetector (0.1.4)
+  - MBProgressHUD (1.0.0)
+  - MJRefresh (3.2.0)
   - MLeaksFinder (1.0.0):
     - FBRetainCycleDetector
   - Moya (13.0.1):
@@ -10,6 +37,7 @@ PODS:
   - Moya/Core (13.0.1):
     - Alamofire (~> 4.1)
     - Result (~> 4.1)
+  - Qiniu (7.2.6)
   - Result (4.1.0)
   - RxAlamofire (5.1.0):
     - RxAlamofire/Core (= 5.1.0)
@@ -30,6 +58,8 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - CleanJSON
+  - "DDSwiftNetwork (from `git@git.corp.imdada.cn:ios/DDSwiftNetwork.git`)"
+  - MJRefresh
   - MLeaksFinder
   - Moya
   - RxAlamofire
@@ -38,13 +68,17 @@ DEPENDENCIES:
   - RxSwift
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
+    - AFNetworking
     - Alamofire
     - CleanJSON
     - Differentiator
     - FBRetainCycleDetector
+    - MBProgressHUD
+    - MJRefresh
     - MLeaksFinder
     - Moya
+    - Qiniu
     - Result
     - RxAlamofire
     - RxCocoa
@@ -52,13 +86,27 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
 
+EXTERNAL SOURCES:
+  DDSwiftNetwork:
+    :git: "git@git.corp.imdada.cn:ios/DDSwiftNetwork.git"
+
+CHECKOUT OPTIONS:
+  DDSwiftNetwork:
+    :commit: f58a52513de03eaeb10ea756841fa81abfbf2128
+    :git: "git@git.corp.imdada.cn:ios/DDSwiftNetwork.git"
+
 SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   CleanJSON: 702dd619e1329c6399a579aa19af311acf47e461
+  DDSwiftNetwork: 6bb5095624588b924834c416688b6c03534c1a25
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
   MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
   Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
+  Qiniu: 9d1f20dcc348919972b4ee1b1272f9b9d4a7e69e
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   RxAlamofire: a2d7621de4c23a0c6e7b476b504acc32838ee341
   RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
@@ -66,6 +114,6 @@ SPEC CHECKSUMS:
   RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
 
-PODFILE CHECKSUM: 28e1cdf91da41a7643ca4e8512851951113d5c6b
+PODFILE CHECKSUM: 53360730e6d5dadb164b0e7a9ec16cfe65f5f44c
 
 COCOAPODS: 1.8.4
