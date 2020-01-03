@@ -5,6 +5,7 @@
 //  Created by Henry on 2019/12/30.
 //  Copyright © 2019 dada. All rights reserved.
 //
+//  cell需使用自动高度布局
 
 import UIKit
 import RxSwift
@@ -15,17 +16,27 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
     
     public typealias updateBlock = (_ text:String)->(Single<[T]>)
     public typealias nextPageBlock = (_ text:String,_ page:Int)->(Single<[T]>)
+    public typealias cellFactory = (
+        cellIdentifier:String,
+        factory:(Int, T, Cell)->(Void),
+        didSelect:(T)->(Void)
+    )
     
     public var searchUpdateAction: updateBlock!
    
     public var nextPageAction: nextPageBlock?
     
-    public var cellFactory : ((_ cellIdentifier: String,_ cellType: Cell.Type) -> ((Int, T, Cell) -> Void))?
+    public var tvFactoryAction : cellFactory!
+    
+    
+    
     
     public var placeHolder:BehaviorRelay<String> =
         BehaviorRelay(value: "请输入要查询的内容")
     
     public var searchResultsTableView: UITableView {
+        let tv = (searchController.searchResultsController as! BDSearchResultController).tableView
+        tv.rowHeight = UITableView.automaticDimension
         return (searchController.searchResultsController as! BDSearchResultController).tableView
     }
 
@@ -94,13 +105,29 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
                     return arr
             }
         }
-        Driver.merge(update, nextPage!)
-            .drive( searchResultsTableView.rx.items(cellFactory!))
+
+        if let nextPage = nextPage {
+            Driver.merge(update, nextPage)
+            .drive(searchResultsTableView.rx
+                .items(cellIdentifier: tvFactoryAction.cellIdentifier, cellType: Cell.self)) {[unowned self] (row,data,cell) in
+                    self.tvFactoryAction.factory(row,data,cell)
+            }
+            .disposed(by: disposeBag)
+        }else{
+            update
+                .drive(searchResultsTableView.rx
+                    .items(cellIdentifier: tvFactoryAction.cellIdentifier, cellType: Cell.self)) {[unowned self] (row,data,cell) in
+                        self.tvFactoryAction.factory(row,data,cell)
+            }
+            .disposed(by: disposeBag)
+        }
         
-        
+        searchResultsTableView.rx
+            .modelSelected(T.self).bind(onNext: {[unowned self] (model) in
+                self.tvFactoryAction.didSelect(model)
+            })
+            .disposed(by: disposeBag)
     }
-    
-    private var result = BehaviorRelay<[T]>(value: [])
     
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        searchBar.becomeFirstResponder()

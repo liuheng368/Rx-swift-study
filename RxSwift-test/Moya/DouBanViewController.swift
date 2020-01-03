@@ -32,6 +32,7 @@ class DouBanViewController: UIViewController {
         loadChannels().bind(to: tableView.rx.items(cellIdentifier: DouBanTableViewCellId, cellType: DouBanTableViewCell.self)) {(row,data,cell) in
             cell.title.text = data.name
         }.disposed(by: disposeBag)
+        
         tableView.rx.modelSelected(SessionModel.Channels.self)
             .map{ $0.channel_id }
             .flatMapLatest{ self.loadPlayList($0) }
