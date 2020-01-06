@@ -63,7 +63,7 @@ extension MVVMApi : TargetType {
     }
     
     var method: Moya.Method {
-        return .post
+        return .get
     }
     
     
@@ -73,11 +73,10 @@ extension MVVMApi : TargetType {
         case .repositories(let str):
             var params: [String: Any] = [:]
             params["q"] = str
-            params["sort"] = ["sad","asdad"]
+            params["sort"] = "stars"
             params["order"] = "desc"
-            return .requestCompositeParameters(bodyParameters: [:],
-                                               bodyEncoding: URLEncoding.httpBody,
-                                               urlParameters: params)
+            return .requestParameters(parameters: params,
+                                      encoding: URLEncoding.default)
         }
     }
     

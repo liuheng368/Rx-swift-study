@@ -22,14 +22,15 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
         didSelect:(T)->(Void)
     )
     
-    public var searchUpdateAction: updateBlock!
-   
-    public var nextPageAction: nextPageBlock?
-    
-    public var tvFactoryAction : cellFactory!
-    
-    
-    
+    public init(searchUpdateAction: @escaping updateBlock,
+         nextPageAction: nextPageBlock? = nil,
+         tvFactoryAction : cellFactory)
+    {
+        self.searchUpdateAction = searchUpdateAction
+        self.nextPageAction = nextPageAction
+        self.tvFactoryAction = tvFactoryAction
+        super.init(nibName: nil, bundle: nil)
+    }
     
     public var placeHolder:BehaviorRelay<String> =
         BehaviorRelay(value: "请输入要查询的内容")
@@ -43,6 +44,16 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
     public var searchBar: UISearchBar {
         return searchController.searchBar
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private let searchUpdateAction: updateBlock
+    
+    private let nextPageAction: nextPageBlock?
+    
+    private let tvFactoryAction : cellFactory
     
     private lazy var searchController: UISearchController = {
         let controller = BDSearchResultController()
@@ -72,11 +83,11 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
         placeHolder.subscribe(onNext: {[unowned self] (str) in
             self.searchBar.placeholder = str
         }).disposed(by: disposeBag)
-        
+    
         let update : Driver<[T]> = searchBar.rx.text.orEmpty
             .throttle(RxTimeInterval.milliseconds(500), scheduler: MainScheduler())
             .distinctUntilChanged()
-            .flatMapLatest {[weak self] (str) -> Observable<[T]> in
+            .flatMap {[weak self] (str) -> Observable<[T]> in
                 guard let network = self?.searchUpdateAction(str) else{
                     return Observable.empty()
                 }
@@ -106,20 +117,19 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
             }
         }
 
+        searchResultsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
         if let nextPage = nextPage {
             Driver.merge(update, nextPage)
-            .drive(searchResultsTableView.rx
-                .items(cellIdentifier: tvFactoryAction.cellIdentifier, cellType: Cell.self)) {[unowned self] (row,data,cell) in
-                    self.tvFactoryAction.factory(row,data,cell)
-            }
-            .disposed(by: disposeBag)
-        }else{
-            update
                 .drive(searchResultsTableView.rx
                     .items(cellIdentifier: tvFactoryAction.cellIdentifier, cellType: Cell.self)) {[unowned self] (row,data,cell) in
                         self.tvFactoryAction.factory(row,data,cell)
             }
             .disposed(by: disposeBag)
+        }else{
+            update
+                .drive(onNext: { (arr) in
+                    (self.searchController.searchResultsController as! BDSearchResultController).data = arr
+                }).disposed(by: disposeBag)
         }
         
         searchResultsTableView.rx

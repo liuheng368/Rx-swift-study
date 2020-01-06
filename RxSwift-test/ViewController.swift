@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+import Moya
+import RxSwift
+import CleanJSON
 class ViewController: UIViewController,UITableViewDelegate {
 
     @IBOutlet weak var tvMain: UITableView!
@@ -70,10 +72,30 @@ class ViewController: UIViewController,UITableViewDelegate {
         case 14:
             vc = PickImageViewController()
         case 15:
-            vc = BDSuperSearchViewController<qwe, UITableViewCell>()
+            vc = BDSuperSearchViewController<MVVMModel.GitHubRepository, UITableViewCell>(searchUpdateAction: { (searchText) in
+                return GitHubProvider.rx
+                    .request(MultiTarget(MVVMApi.repositories(searchText)))
+                    .asObservable()
+                    .compactMap { try! CleanJSONDecoder().decode(MVVMModel.self, from: $0.data).items}
+                    .asSingle()
+            }, tvFactoryAction: (cellIdentifier:"cellId",
+                                 factory: {(row,model,cell) in
+                           cell.textLabel?.text = model.name
+                           cell.detailTextLabel?.text = model.htmlUrl
+            },didSelect:{[unowned self] model in
+                self.showAlert(title: model.name, message: model.htmlUrl)
+            }))
         default:break
         }
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func showAlert(title:String, message:String){
+        let alertController = UIAlertController(title: title,
+                                                message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "确定", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 

@@ -19,7 +19,6 @@
 		023632CB23BD9A2B000B0FBD /* MJRefresh+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023632CA23BD9A2B000B0FBD /* MJRefresh+Rx.swift */; };
 		024AA5CA23B9ED4B00B154DF /* BDSuperSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024AA5C823B9ED4B00B154DF /* BDSuperSearchViewController.swift */; };
 		024AA5CB23B9ED4B00B154DF /* BDSearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024AA5C923B9ED4B00B154DF /* BDSearchResultController.swift */; };
-		024AA5CD23B9ED5C00B154DF /* SearchDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024AA5CC23B9ED5C00B154DF /* SearchDemoViewController.swift */; };
 		025F9733230BCADC00B73BB9 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F9732230BCADC00B73BB9 /* Operators.swift */; };
 		025F9735230BE23100B73BB9 /* TapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F9734230BE23100B73BB9 /* TapViewController.swift */; };
 		025F973A230BF4CD00B73BB9 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F9738230BF4CD00B73BB9 /* DatePickerViewController.swift */; };
@@ -78,7 +77,6 @@
 		023632CA23BD9A2B000B0FBD /* MJRefresh+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MJRefresh+Rx.swift"; sourceTree = "<group>"; };
 		024AA5C823B9ED4B00B154DF /* BDSuperSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDSuperSearchViewController.swift; sourceTree = "<group>"; };
 		024AA5C923B9ED4B00B154DF /* BDSearchResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDSearchResultController.swift; sourceTree = "<group>"; };
-		024AA5CC23B9ED5C00B154DF /* SearchDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDemoViewController.swift; sourceTree = "<group>"; };
 		025F9732230BCADC00B73BB9 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		025F9734230BE23100B73BB9 /* TapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapViewController.swift; sourceTree = "<group>"; };
 		025F9738230BF4CD00B73BB9 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -172,7 +170,6 @@
 		024AA5C723B9ED4B00B154DF /* SearchController */ = {
 			isa = PBXGroup;
 			children = (
-				024AA5CC23B9ED5C00B154DF /* SearchDemoViewController.swift */,
 				024AA5C823B9ED4B00B154DF /* BDSuperSearchViewController.swift */,
 				024AA5C923B9ED4B00B154DF /* BDSearchResultController.swift */,
 				023632CA23BD9A2B000B0FBD /* MJRefresh+Rx.swift */,
@@ -490,7 +487,6 @@
 				025F973A230BF4CD00B73BB9 /* DatePickerViewController.swift in Sources */,
 				02EE692C2303E8AF00DE893E /* TextFieldsViewController.swift in Sources */,
 				02E64EC5230E74D90023EC65 /* RxDataSourceViewController.swift in Sources */,
-				024AA5CD23B9ED5C00B154DF /* SearchDemoViewController.swift in Sources */,
 				029C12972394276200864E23 /* RxCLLocationManagerDelegateProxy.swift in Sources */,
 				0279056522EEFBB60005333B /* AppDelegate.swift in Sources */,
 				02CCF19B238D330A001307CC /* DouBanModel.swift in Sources */,
