@@ -49,6 +49,7 @@
 		02CCF198238D3240001307CC /* MoyaProvider+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCF197238D3240001307CC /* MoyaProvider+Rx.swift */; };
 		02CCF19B238D330A001307CC /* DouBanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCF19A238D330A001307CC /* DouBanModel.swift */; };
 		02CCF19D238D36A2001307CC /* DouBanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCF19C238D36A2001307CC /* DouBanViewController.swift */; };
+		02DEA28F23C481B400A184FD /* dedeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DEA28E23C481B400A184FD /* dedeViewController.swift */; };
 		02E64EC5230E74D90023EC65 /* RxDataSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E64EC4230E74D90023EC65 /* RxDataSourceViewController.swift */; };
 		02EE691F23015D1800DE893E /* TableViewSimpleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EE691D23015D1800DE893E /* TableViewSimpleViewController.swift */; };
 		02EE692023015D1800DE893E /* TableViewSimpleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02EE691E23015D1800DE893E /* TableViewSimpleViewController.xib */; };
@@ -109,6 +110,7 @@
 		02CCF197238D3240001307CC /* MoyaProvider+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MoyaProvider+Rx.swift"; sourceTree = "<group>"; };
 		02CCF19A238D330A001307CC /* DouBanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DouBanModel.swift; sourceTree = "<group>"; };
 		02CCF19C238D36A2001307CC /* DouBanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DouBanViewController.swift; sourceTree = "<group>"; };
+		02DEA28E23C481B400A184FD /* dedeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dedeViewController.swift; sourceTree = "<group>"; };
 		02E64EC4230E74D90023EC65 /* RxDataSourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxDataSourceViewController.swift; sourceTree = "<group>"; };
 		02EE691D23015D1800DE893E /* TableViewSimpleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSimpleViewController.swift; sourceTree = "<group>"; };
 		02EE691E23015D1800DE893E /* TableViewSimpleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewSimpleViewController.xib; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				024AA5C823B9ED4B00B154DF /* BDSuperSearchViewController.swift */,
 				024AA5C923B9ED4B00B154DF /* BDSearchResultController.swift */,
 				023632CA23BD9A2B000B0FBD /* MJRefresh+Rx.swift */,
+				02DEA28E23C481B400A184FD /* dedeViewController.swift */,
 			);
 			path = SearchController;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				02EE69272302963000DE893E /* Label+fontSize.swift in Sources */,
 				022EBD5B238E75BC0082022C /* DouBanTableViewCell.swift in Sources */,
 				029C12A323951B7400864E23 /* UIImagePcikDelegateProxy.swift in Sources */,
+				02DEA28F23C481B400A184FD /* dedeViewController.swift in Sources */,
 				024AA5CB23B9ED4B00B154DF /* BDSearchResultController.swift in Sources */,
 				02AEB0B92383ED680011791D /* UploadViewController.swift in Sources */,
 				029B32B42390B6180018AEE6 /* ActivityIndicator.swift in Sources */,
@@ -658,8 +662,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 4J3V9M76HP;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "RxSwift-test/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -680,7 +685,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4J3V9M76HP;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "RxSwift-test/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

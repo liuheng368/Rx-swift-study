@@ -77,7 +77,7 @@ class ViewController: UIViewController,UITableViewDelegate {
                     .request(MultiTarget(MVVMApi.repositories(searchText)))
                     .asObservable()
                     .compactMap { try! CleanJSONDecoder().decode(MVVMModel.self, from: $0.data).items}
-                    .asSingle()
+                    .asDriver(onErrorJustReturn: [])
             }, tvFactoryAction: (cellIdentifier:"cellId",
                                  factory: {(row,model,cell) in
                            cell.textLabel?.text = model.name

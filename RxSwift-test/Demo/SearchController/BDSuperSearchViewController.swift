@@ -14,8 +14,8 @@ import Moya
 import DDSwiftNetwork
 class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewController {
     
-    public typealias updateBlock = (_ text:String)->(Single<[T]>)
-    public typealias nextPageBlock = (_ text:String,_ page:Int)->(Single<[T]>)
+    public typealias updateBlock = (_ text:String)->(Driver<[T]>)
+    public typealias nextPageBlock = (_ text:String,_ page:Int)->(Driver<[T]>)
     public typealias cellFactory = (
         cellIdentifier:String,
         factory:(Int, T, Cell)->(Void),
@@ -36,9 +36,7 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
         BehaviorRelay(value: "请输入要查询的内容")
     
     public var searchResultsTableView: UITableView {
-        let tv = (searchController.searchResultsController as! BDSearchResultController).tableView
-        tv.rowHeight = UITableView.automaticDimension
-        return (searchController.searchResultsController as! BDSearchResultController).tableView
+        (searchController.searchResultsController as! BDSearchResultController).tableView
     }
 
     public var searchBar: UISearchBar {
@@ -55,19 +53,7 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
     
     private let tvFactoryAction : cellFactory
     
-    private lazy var searchController: UISearchController = {
-        let controller = BDSearchResultController()
-        let searchC = UISearchController(searchResultsController: controller)
-        if #available(iOS 9.1, *) {
-            searchC.obscuresBackgroundDuringPresentation = false
-        }
-        searchC.dimsBackgroundDuringPresentation = false
-        searchC.searchResultsUpdater = self as? UISearchResultsUpdating
-        #if swift(<11.0)
-        searchC.hidesNavigationBarDuringPresentation = false
-        #endif
-        return searchC
-    }()
+    private var searchController: UISearchController!
     
     private var currentPage : Int = 1
     
@@ -84,7 +70,8 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
             self.searchBar.placeholder = str
         }).disposed(by: disposeBag)
     
-        let update : Driver<[T]> = searchBar.rx.text.orEmpty
+         searchBar.rx.text.orEmpty
+            .filter{ $0.count > 0 }
             .throttle(RxTimeInterval.milliseconds(500), scheduler: MainScheduler())
             .distinctUntilChanged()
             .flatMap {[weak self] (str) -> Observable<[T]> in
@@ -96,10 +83,14 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
             .map {[weak self] arr -> [T]  in
                 guard let `self` = self else{return []}
                 self.searchResult.removeAll()
-                arr.forEach{ self.searchResult.append($0) }
-                return arr
-        }
-        
+                arr.forEach{[weak self] in
+                    if let _ = self {
+                        self!.searchResult.append($0) }
+                    }
+                return arr}.drive(onNext: { (a) in
+                    print(a)
+            }).disposed(by: disposeBag)
+
         var nextPage : Driver<[T]>?
         if let nextPageAction = nextPageAction {
             nextPage = searchResultsTableView.rx
@@ -118,20 +109,14 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
         }
 
         searchResultsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
-        if let nextPage = nextPage {
-            Driver.merge(update, nextPage)
-                .drive(searchResultsTableView.rx
-                    .items(cellIdentifier: tvFactoryAction.cellIdentifier, cellType: Cell.self)) {[unowned self] (row,data,cell) in
-                        self.tvFactoryAction.factory(row,data,cell)
-            }
-            .disposed(by: disposeBag)
-        }else{
-            update
-                .drive(onNext: { (arr) in
-                    (self.searchController.searchResultsController as! BDSearchResultController).data = arr
-                }).disposed(by: disposeBag)
-        }
         
+//        Driver.merge(update, nextPage ?? Driver.empty())
+//            .drive(searchResultsTableView.rx
+//                .items(cellIdentifier: tvFactoryAction.cellIdentifier, cellType: Cell.self)) {[unowned self] (row,data,cell) in
+//                self.tvFactoryAction.factory(row,data,cell)
+//        }
+//        .disposed(by: disposeBag)
+
         searchResultsTableView.rx
             .modelSelected(T.self).bind(onNext: {[unowned self] (model) in
                 self.tvFactoryAction.didSelect(model)
@@ -144,17 +129,26 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
 //    }
     
     func configureSearchController() {
+        let controller = BDSearchResultController()
+        searchController = UISearchController(searchResultsController: controller)
+        if #available(iOS 9.1, *) {
+            searchController.obscuresBackgroundDuringPresentation = false
+        }
+        searchController.dimsBackgroundDuringPresentation = false
+        #if swift(<11.0)
+        searchController.hidesNavigationBarDuringPresentation = false
+        #endif
         searchBar.autocapitalizationType = .none
-        
+
         if #available(*, iOS 11.0.1) {
             navigationItem.searchController = searchController
             navigationItem.hidesSearchBarWhenScrolling = false
         } else {
-            navigationItem.titleView = searchController.searchBar
+            navigationItem.titleView = searchBar
         }
         definesPresentationContext = true
         extendedLayoutIncludesOpaqueBars = true
-        
+
         var tf : UITextField
         if #available(iOS 13.0, *) {
             tf = searchBar.searchTextField
