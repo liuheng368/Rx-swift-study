@@ -27,7 +27,7 @@ let GitHubProvider = bdMoyaProvider<MultiTarget>()
 
 class bdMoyaProvider<Target: TargetType>: MoyaProvider<Target> {
     init() {
-//        super.init(plugins: [DDNetworkLoggerPlugin()])
+        super.init(plugins:[DDNetworkLoggerPlugin()])
     }
 }
 
@@ -40,6 +40,41 @@ enum MVVMApi{
     case repositories(_ content:String)
 }
 
+enum vvv  : TargetType {
+    case lll
+    
+    var baseURL: URL {
+        return URL(string: "http://bdapi.ndev.imdada.cn")!
+    }
+    
+    var sampleData: Data {
+        return "{}".data(using: String.Encoding.utf8)!
+    }
+    
+    var headers: [String : String]? {
+        return ["Content-Type": "application/json",
+                "User-Id":"9974",
+                "Virtual-Id":"25501",
+                "User-Token":"hyl",
+                "Verification-Hash":"Alan.p"]
+    }
+    
+    var path: String {
+        return "/v1/user/findBdByAddress"
+    }
+    
+    var method: Moya.Method {
+        return .post
+    }
+    
+    var task: Task {
+        var a : [[String:Double]] = []
+        a.append(["cityId":1,"lat":22.281960,"lng":114.163171])
+        let data = try! JSONSerialization.data(withJSONObject: ["addressList":a ], options: .prettyPrinted)
+        return .requestCompositeData(bodyData: data, urlParameters: [:])
+//        return .requestCompositeParameters(bodyParameters: ["supplierIds":[1,2]], bodyEncoding: URLEncoding.httpBody, urlParameters: [:])
+    }
+}
 
 extension MVVMApi : TargetType {
     var baseURL: URL {

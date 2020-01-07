@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02009A1723C5D35800A136B5 /* ffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02009A1623C5D35800A136B5 /* ffViewController.swift */; };
 		022EBD5B238E75BC0082022C /* DouBanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022EBD59238E75BC0082022C /* DouBanTableViewCell.swift */; };
 		022EBD5C238E75BC0082022C /* DouBanTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 022EBD5A238E75BC0082022C /* DouBanTableViewCell.xib */; };
 		022EBD5F238E7CA90082022C /* MVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022EBD5E238E7CA90082022C /* MVVMViewController.swift */; };
@@ -33,6 +32,7 @@
 		0279056A22EEFBB60005333B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0279056822EEFBB60005333B /* Main.storyboard */; };
 		0279056C22EEFBB70005333B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0279056B22EEFBB70005333B /* Assets.xcassets */; };
 		0279056F22EEFBB70005333B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0279056D22EEFBB70005333B /* LaunchScreen.storyboard */; };
+		028661D123C8260B0028B967 /* DDNetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028661D023C8260B0028B967 /* DDNetworkLoggerPlugin.swift */; };
 		029B32B42390B6180018AEE6 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029B32B32390B6180018AEE6 /* ActivityIndicator.swift */; };
 		029C12942394266500864E23 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029C12922394266500864E23 /* LocationViewController.swift */; };
 		029C12952394266500864E23 /* LocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 029C12932394266500864E23 /* LocationViewController.xib */; };
@@ -66,7 +66,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		02009A1623C5D35800A136B5 /* ffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ffViewController.swift; sourceTree = "<group>"; };
 		022145A322F0462B00CD51E2 /* RxSwift核心.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "RxSwift核心.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		022EBD59238E75BC0082022C /* DouBanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DouBanTableViewCell.swift; sourceTree = "<group>"; };
 		022EBD5A238E75BC0082022C /* DouBanTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DouBanTableViewCell.xib; sourceTree = "<group>"; };
@@ -95,6 +94,7 @@
 		0279056B22EEFBB70005333B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0279056E22EEFBB70005333B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0279057022EEFBB70005333B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		028661D023C8260B0028B967 /* DDNetworkLoggerPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDNetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		029B32B32390B6180018AEE6 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		029C12922394266500864E23 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		029C12932394266500864E23 /* LocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationViewController.xib; sourceTree = "<group>"; };
@@ -178,7 +178,6 @@
 				024AA5C923B9ED4B00B154DF /* BDSearchResultController.swift */,
 				023632CA23BD9A2B000B0FBD /* MJRefresh+Rx.swift */,
 				02DEA28E23C481B400A184FD /* dedeViewController.swift */,
-				02009A1623C5D35800A136B5 /* ffViewController.swift */,
 			);
 			path = SearchController;
 			sourceTree = "<group>";
@@ -232,6 +231,7 @@
 				0279056422EEFBB60005333B /* AppDelegate.swift */,
 				023632C523BD91E4000B0FBD /* NetWorkManger-Swift */,
 				0279056622EEFBB60005333B /* ViewController.swift */,
+				028661D023C8260B0028B967 /* DDNetworkLoggerPlugin.swift */,
 				0279056822EEFBB60005333B /* Main.storyboard */,
 				0279056B22EEFBB70005333B /* Assets.xcassets */,
 				0279057022EEFBB70005333B /* Info.plist */,
@@ -489,7 +489,6 @@
 				02F100982350322A005C8DDD /* CollectionSimpleViewController.swift in Sources */,
 				025F9733230BCADC00B73BB9 /* Operators.swift in Sources */,
 				02EE693123040CCF00DE893E /* ButtonViewController.swift in Sources */,
-				02009A1723C5D35800A136B5 /* ffViewController.swift in Sources */,
 				022EBD5F238E7CA90082022C /* MVVMViewController.swift in Sources */,
 				0279056722EEFBB60005333B /* ViewController.swift in Sources */,
 				025F973A230BF4CD00B73BB9 /* DatePickerViewController.swift in Sources */,
@@ -514,6 +513,7 @@
 				023632CB23BD9A2B000B0FBD /* MJRefresh+Rx.swift in Sources */,
 				02EE691F23015D1800DE893E /* TableViewSimpleViewController.swift in Sources */,
 				022EBD71238FB0770082022C /* RegisterViewModel.swift in Sources */,
+				028661D123C8260B0028B967 /* DDNetworkLoggerPlugin.swift in Sources */,
 				022EBD61238E7FD40082022C /* MVVMModel.swift in Sources */,
 				023632C923BD91E4000B0FBD /* BDTargetType.swift in Sources */,
 				02F35C84237C1961001AE5B8 /* PickViewViewController.swift in Sources */,
@@ -578,7 +578,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

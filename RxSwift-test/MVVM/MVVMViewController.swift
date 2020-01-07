@@ -9,7 +9,7 @@
 import UIKit
 import RxCocoa
 import RxSwift
-
+import Moya
 class MVVMViewController: UIViewController {
 
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
@@ -44,6 +44,15 @@ class MVVMViewController: UIViewController {
             .subscribe(onNext: {[unowned self] (item) in
                 self.showAlert(title: item.fullName, message: item.description)
             }).disposed(by: disposeBag)
+        
+        let a = GitHubProvider.rx.request(MultiTarget(vvv.lll)).subscribe(onSuccess: { (obj) in
+            print(obj)
+        }) { (err) in
+            print(err)
+        }.disposed(by: disposeBag)
+        
+        
+        
     }
     
     func showAlert(title:String, message:String){
