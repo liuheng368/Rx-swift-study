@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '9.0'
 source 'https://github.com/CocoaPods/Specs.git'
 
 
@@ -20,9 +20,13 @@ pod 'DDSwiftNetwork', :git => 'git@git.corp.imdada.cn:ios/DDSwiftNetwork.git'
 end
 
 post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-        config.build_settings['DYLIB_COMPATIBILITY_VERSION'] = ''
-    end
+      installer.pods_project.targets.each do |target|
+          if target.name == 'RxSwift'
+              target.build_configurations.each do |config|
+                  if config.name == 'Debug'
+                      config.build_settings['OTHER_SWIFT_FLAGS'] ||= ['-D', 'TRACE_RESOURCES']
+                  end
+              end
+          end
+      end
   end
-end

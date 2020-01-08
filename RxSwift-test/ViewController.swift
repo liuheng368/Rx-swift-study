@@ -9,6 +9,7 @@
 import UIKit
 import Moya
 import RxSwift
+import RxCocoa
 import CleanJSON
 class ViewController: UIViewController,UITableViewDelegate {
 
@@ -72,12 +73,15 @@ class ViewController: UIViewController,UITableViewDelegate {
         case 14:
             vc = PickImageViewController()
         case 15:
+//            vc = ffViewController()
+            
             vc = BDSuperSearchViewController<MVVMModel.GitHubRepository, UITableViewCell>(searchUpdateAction: { (searchText) in
-                return GitHubProvider.rx
-                    .request(MultiTarget(MVVMApi.repositories(searchText)))
-                    .asObservable()
-                    .compactMap { try! CleanJSONDecoder().decode(MVVMModel.self, from: $0.data).items}
-                    .asDriver(onErrorJustReturn: [])
+                return Driver.empty()
+//                GitHubProvider.rx
+//                    .request(MultiTarget(MVVMApi.repositories(searchText)))
+//                    .asObservable()
+//                    .compactMap { try! CleanJSONDecoder().decode(MVVMModel.self, from: $0.data).items}
+//                    .asDriver(onErrorJustReturn: [])
             }, tvFactoryAction: (cellIdentifier:"cellId",
                                  factory: {(row,model,cell) in
                            cell.textLabel?.text = model.name

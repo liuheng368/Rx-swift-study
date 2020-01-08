@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02009A1723C5D35800A136B5 /* ffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02009A1623C5D35800A136B5 /* ffViewController.swift */; };
 		022EBD5B238E75BC0082022C /* DouBanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022EBD59238E75BC0082022C /* DouBanTableViewCell.swift */; };
 		022EBD5C238E75BC0082022C /* DouBanTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 022EBD5A238E75BC0082022C /* DouBanTableViewCell.xib */; };
 		022EBD5F238E7CA90082022C /* MVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022EBD5E238E7CA90082022C /* MVVMViewController.swift */; };
@@ -65,6 +66,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		02009A1623C5D35800A136B5 /* ffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ffViewController.swift; sourceTree = "<group>"; };
 		022145A322F0462B00CD51E2 /* RxSwift核心.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "RxSwift核心.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		022EBD59238E75BC0082022C /* DouBanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DouBanTableViewCell.swift; sourceTree = "<group>"; };
 		022EBD5A238E75BC0082022C /* DouBanTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DouBanTableViewCell.xib; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				024AA5C923B9ED4B00B154DF /* BDSearchResultController.swift */,
 				023632CA23BD9A2B000B0FBD /* MJRefresh+Rx.swift */,
 				02DEA28E23C481B400A184FD /* dedeViewController.swift */,
+				02009A1623C5D35800A136B5 /* ffViewController.swift */,
 			);
 			path = SearchController;
 			sourceTree = "<group>";
@@ -486,6 +489,7 @@
 				02F100982350322A005C8DDD /* CollectionSimpleViewController.swift in Sources */,
 				025F9733230BCADC00B73BB9 /* Operators.swift in Sources */,
 				02EE693123040CCF00DE893E /* ButtonViewController.swift in Sources */,
+				02009A1723C5D35800A136B5 /* ffViewController.swift in Sources */,
 				022EBD5F238E7CA90082022C /* MVVMViewController.swift in Sources */,
 				0279056722EEFBB60005333B /* ViewController.swift in Sources */,
 				025F973A230BF4CD00B73BB9 /* DatePickerViewController.swift in Sources */,
@@ -574,7 +578,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
