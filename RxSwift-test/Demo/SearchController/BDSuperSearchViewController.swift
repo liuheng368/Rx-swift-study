@@ -12,6 +12,7 @@ import RxSwift
 import RxCocoa
 import Moya
 import DDSwiftNetwork
+import MJRefresh
 class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewController {
     
     public typealias updateBlock = (_ text:String)->(Driver<[T]>)
@@ -34,6 +35,7 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
     
     public var placeHolder:BehaviorRelay<String> =
         BehaviorRelay(value: "请输入要查询的内容")
+    //        print(placeHolder.value)
     
     public var searchResultsTableView: UITableView {
         (searchController.searchResultsController as! BDSearchResultController).tableView
@@ -42,6 +44,9 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
     public var searchBar: UISearchBar {
         return searchController.searchBar
     }
+    
+    /// 单页最大数据量
+    public var pageSize : Int = 10
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -57,21 +62,17 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
     
     private var currentPage : Int = 1
     private var currentNetworkDis : Disposable?
-    let response = BehaviorRelay<String>(value: "")
+    private var nextPageNetworkDis : Disposable?
+    let nextPageResponse = BehaviorRelay<[T]>(value: [])
     let updateResponse = BehaviorRelay<[T]>(value: [])
     let disposeBag = DisposeBag()
     private lazy var searchResult:[T] = []
     
-    deinit {
-        print("deinit:")
-        
-    }
-    
     override func viewDidDisappear(_ animated: Bool) {
         currentNetworkDis?.dispose()
+        nextPageNetworkDis?.dispose()
     }
-    var a : Observable<()>?
-//    let updateResponse = BehaviorRelay<String>(value: "")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -79,7 +80,7 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
         
         searchBar.rx.text.orEmpty
             .filter{ $0.count > 0 }
-            .throttle(RxTimeInterval.milliseconds(50), scheduler: MainScheduler())
+            .throttle(RxTimeInterval.milliseconds(500), scheduler: MainScheduler())
             .distinctUntilChanged()
             .map {[weak self] (str) in
                 guard let `self` = self else{return}
@@ -91,66 +92,58 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
                     .asDriver(onErrorJustReturn: [])
                     .map {[weak self] arr -> [T]  in
                         guard let `self` = self else{return []}
+                        if arr.count >= self.pageSize {
+                            self.searchResultsTableView.mj_footer.isHidden = false
+                        }
                         self.searchResult.removeAll()
                         arr.forEach{ self.searchResult.append($0) }
                         return arr}
-                    .drive(self.updateResponse)
-        }.debug()
+                    .drive(self.updateResponse)}
             .subscribe(onNext: { () in
                 print("sdasd")
             }).disposed(by: disposeBag)
-        
-//            .flatMap {[weak self] (str) -> Observable<[T]> in
-//                guard let `self` = self else{return Observable.empty()}
-//                return self.searchUpdateAction(str).asObservable() }
-//            .asDriver(onErrorJustReturn: [])
-//            .map {[weak self] arr -> [T]  in
-//                guard let `self` = self else{return []}
-//                self.searchResult.removeAll()
-//                arr.forEach{ self.searchResult.append($0) }
-//            return arr}.debug()
 
-        
-        var nextPage : Driver<[T]>?
         if let nextPageAction = nextPageAction {
-            nextPage = searchResultsTableView.rx
-                .footerView
-                .flatMapLatest {[weak self] (_) -> Observable<[T]> in
-                    guard let `self` = self else{return Observable.empty()}
+            searchResultsTableView.rx.footerView
+                .throttle(RxTimeInterval.seconds(1), scheduler: MainScheduler())
+                .map {[weak self] (str) in
+                        guard let `self` = self else{return}
+                        if let _ = self.nextPageNetworkDis {
+                            self.nextPageNetworkDis?.dispose()
+                        }
                     self.currentPage += 1
-                    let network = nextPageAction(self.searchBar.text ?? "", self.currentPage)
-                    return network.asObservable() }
-                .asDriver(onErrorJustReturn: [])
-                .map {[weak self] arr -> [T] in
-                    guard let `self` = self else{return []}
-                    arr.forEach{ self.searchResult.append($0) }
-                    return arr
-            }
+                    self.nextPageNetworkDis = nextPageAction(self.searchBar.text ?? "", self.currentPage)
+                            .asDriver(onErrorJustReturn: [])
+                            .map {[weak self] arr -> [T]  in
+                                guard let `self` = self else{return []}
+                                self.searchResultsTableView.mj_footer.endRefreshing()
+                                if arr.count < self.pageSize {
+                                    self.searchResultsTableView.mj_footer.isHidden = true
+                                }
+                                arr.forEach{ self.searchResult.append($0) }
+                                return arr}
+                            .drive(self.nextPageResponse)}
+                .subscribe(onNext: { () in}).disposed(by: disposeBag)
         }
 
         searchResultsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
-        updateResponse.subscribe(onNext: { (arr) in
-            print(arr.count)
-        })
-        Observable.merge(updateResponse.asObservable(),updateResponse.asObservable())
+        Observable.merge(updateResponse.asObservable(), nextPageResponse.asObservable())
+            .map {[weak self] (_) -> [T] in
+                guard let `self` = self else{return []}
+                return self.searchResult}
             .bind(to:searchResultsTableView.rx
                 .items(cellIdentifier: tvFactoryAction.cellIdentifier, cellType: Cell.self)) {[weak self] (row,data,cell) in
                     self?.currentNetworkDis = nil
+                    self?.nextPageNetworkDis = nil
                     self?.tvFactoryAction.factory(row,data,cell)
-            }.disposed(by: disposeBag)
-        
-//        currentNetworkDis = Driver.merge(update, nextPage ?? Driver.empty())
-//            .drive(searchResultsTableView.rx
-//                .items(cellIdentifier: tvFactoryAction.cellIdentifier, cellType: Cell.self)) {[weak self] (row,data,cell) in
-//                self?.tvFactoryAction.factory(row,data,cell)
-//        }
+        }.disposed(by: disposeBag)
 
         searchResultsTableView.rx
             .modelSelected(T.self).bind(onNext: {[unowned self] (model) in
                 self.tvFactoryAction.didSelect(model)
             })
             .disposed(by: disposeBag)
-        
+
         placeHolder.subscribe(onNext: {[unowned self] (str) in
             self.searchBar.placeholder = str
         }).disposed(by: disposeBag)
@@ -160,7 +153,13 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
 //        searchBar.becomeFirstResponder()
 //    }
     
-    func configureSearchController() {
+    deinit {
+        print("deinit:")
+    }
+}
+
+extension BDSuperSearchViewController {
+    fileprivate func configureSearchController() {
         let controller = BDSearchResultController()
         searchController = UISearchController(searchResultsController: controller)
         if #available(iOS 9.1, *) {
@@ -191,8 +190,4 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
         tf.font = UIFont.systemFont(ofSize: 14)
         searchBar.sizeToFit()
     }
-}
-
-struct qwe:Decodable {
-    var ss : String
 }

@@ -78,6 +78,12 @@ class ViewController: UIViewController,UITableViewDelegate {
                     .asObservable()
                     .compactMap { try! CleanJSONDecoder().decode(MVVMModel.self, from: $0.data).items}
                     .asDriver(onErrorJustReturn: [])
+            },nextPageAction:{ (searchText, page) in
+                return GitHubProvider.rx
+                    .request(MultiTarget(MVVMApi.repositories(searchText)))
+                    .asObservable()
+                    .compactMap { try! CleanJSONDecoder().decode(MVVMModel.self, from: $0.data).items}
+                    .asDriver(onErrorJustReturn: [])
             }, tvFactoryAction: (cellIdentifier:"cellId",
                                  factory: {(row,model,cell) in
                            cell.textLabel?.text = model.name
@@ -85,6 +91,7 @@ class ViewController: UIViewController,UITableViewDelegate {
             },didSelect:{[unowned self] model in
                 self.showAlert(title: model.name, message: model.htmlUrl)
             }))
+            (vc as? BDSuperSearchViewController<MVVMModel.GitHubRepository, UITableViewCell>)?.placeHolder.accept("商户ID")
         default:break
         }
         self.navigationController?.pushViewController(vc, animated: true)

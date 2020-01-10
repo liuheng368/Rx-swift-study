@@ -20,7 +20,7 @@ extension Reactive where Base: UITableView{
                 observe.on(.completed)
                 return Disposables.create()
             }
-            tableview.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
+            tableview.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
                 observe.on(.next(()))
             })
             

@@ -16,7 +16,7 @@ PODS:
     - AFNetworking/NSURLSession
   - Alamofire (4.9.1)
   - CleanJSON (1.0.0)
-  - DDSwiftNetwork (0.1.0):
+  - DDSwiftNetwork (0.1.1):
     - AFNetworking (~> 3.2.1)
     - Alamofire (~> 4.9.1)
     - CleanJSON (~> 1.0.0)
@@ -92,14 +92,14 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   DDSwiftNetwork:
-    :commit: f58a52513de03eaeb10ea756841fa81abfbf2128
+    :commit: efa2999a950630a1e73afb1222c36a266894fd07
     :git: "git@git.corp.imdada.cn:ios/DDSwiftNetwork.git"
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   CleanJSON: 702dd619e1329c6399a579aa19af311acf47e461
-  DDSwiftNetwork: 6bb5095624588b924834c416688b6c03534c1a25
+  DDSwiftNetwork: 92c3a9ed2b8cf39716e033d7d736ad64c385fad7
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
@@ -114,6 +114,6 @@ SPEC CHECKSUMS:
   RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
 
-PODFILE CHECKSUM: dda6712cc6b1dbe98d05ff68ad280340b5234a44
+PODFILE CHECKSUM: d83ab3928881d7336eec3c959476b5cb4b9b4ad2
 
 COCOAPODS: 1.8.4
