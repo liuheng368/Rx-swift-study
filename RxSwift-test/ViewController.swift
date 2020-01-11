@@ -91,6 +91,7 @@ class ViewController: UIViewController,UITableViewDelegate {
             },didSelect:{[unowned self] model in
                 self.showAlert(title: model.name, message: model.htmlUrl)
             }))
+            (vc as? BDSuperSearchViewController<MVVMModel.GitHubRepository, UITableViewCell>)?.searchResultsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
             (vc as? BDSuperSearchViewController<MVVMModel.GitHubRepository, UITableViewCell>)?.placeHolder.accept("商户ID")
         default:break
         }
