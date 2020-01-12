@@ -10,7 +10,7 @@
 import UIKit
 
 enum BDSearchResultState {
-    case Result, NoResult, LessInput
+    case Loading, Result, NoResult, LessInput
 }
 
 class BDSearchResultController: UIViewController {
@@ -20,6 +20,9 @@ class BDSearchResultController: UIViewController {
             switch resultState {
             case .Result:
                 tableView.isHidden = false
+            case .Loading:
+                tableView.isHidden = true
+                lblTips.text = loading
             case .NoResult:
                 tableView.isHidden = true
                 lblTips.text = noResult
@@ -35,6 +38,7 @@ class BDSearchResultController: UIViewController {
     
     let lessInputTips = "再输入一点信息吧~"
     let noResult = "没有搜索结果，换个关键词试试..."
+    let loading = "正在拼命加载中..."
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white

@@ -13,7 +13,7 @@ import RxCocoa
 import Moya
 import DDSwiftNetwork
 import MJRefresh
-class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewController,UITableViewDelegate {
     
     public typealias updateBlock = (_ text:String)->(Driver<[T]>)
     public typealias nextPageBlock = (_ text:String,_ page:Int)->(Driver<[T]>)
@@ -69,17 +69,27 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
     
     private var currentPage : Int = 1
     private var currentNetworkDis : Disposable?
-    private var nextPageNetworkDis : Disposable?
     let nextPageResponse = BehaviorRelay<[T]>(value: [])
     let updateResponse = BehaviorRelay<[T]>(value: [])
     let disposeBag = DisposeBag()
+    
     private lazy var searchResult:[T] = []
     
     private let historyTableView = UITableView(frame: CGRect.zero, style: .plain)
-    fileprivate var arrHistory : [String] = []
+    fileprivate let userDefaultsManger:DataPersistManger = DataPersistManger()
+    fileprivate var historyResponse: BehaviorRelay<[String]> {
+        if let arr = userDefaultsManger.getDataFromKeysArchive(placeHolder.value),
+            let ar = arr as? [String]{
+            return BehaviorRelay<[String]>(value: ar)
+        }else{
+            return BehaviorRelay<[String]>(value: [])
+        }
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
-        currentNetworkDis?.dispose()
-        nextPageNetworkDis?.dispose()
+        networkCancle()
+//        _ = nextPageResponse.takeUntil(rx.deallocated)
+//        _ = updateResponse.takeUntil(rx.deallocated)
     }
     
     override func viewDidLoad() {
@@ -93,15 +103,17 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
                 self.searchResultsVC.resultState = .LessInput})
             .disposed(by: disposeBag)
         
-        searchBar.rx.text.orEmpty
+        //由于代码填入searchbar不会触发didTextChange的代理方法
+        //估使用kvo来观察text的变化（text属于lazy在用户输入时并不改变）
+        searchBar.rx.observeWeakly(String.self, "text")
+            .map{ $0 ?? ""}
             .filter{ $0.count > 2 }
             .throttle(RxTimeInterval.milliseconds(500), scheduler: MainScheduler())
-            .distinctUntilChanged()
             .map {[weak self] (str) in
                 guard let `self` = self else{return}
-                if let _ = self.currentNetworkDis {
-                    self.currentNetworkDis?.dispose()
-                }
+                self.networkCancle()
+                self.searchResultsVC.resultState = .Loading
+                self.currentPage = 1
                 self.currentNetworkDis = self.searchUpdateAction(str)
                     .asDriver(onErrorJustReturn: [])
                     .map {[weak self] arr -> [T]  in
@@ -119,17 +131,42 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
                         return arr}
                     .drive(self.updateResponse)}
             .subscribe(onNext: { () in}).disposed(by: disposeBag)
- 
+        
+        searchBar.rx.textChange.orEmpty
+            .filter{ $0.count > 2 }
+            .throttle(RxTimeInterval.milliseconds(500), scheduler: MainScheduler())
+            .map {[weak self] (str) in
+                guard let `self` = self else{return}
+                self.networkCancle()
+                self.searchResultsVC.resultState = .Loading
+                self.currentPage = 1
+                self.currentNetworkDis = self.searchUpdateAction(str)
+                    .asDriver(onErrorJustReturn: [])
+                    .map {[weak self] arr -> [T]  in
+                        guard let `self` = self else{return []}
+                        if arr.count >= self.pageSize {
+                            self.searchResultsTableView.mj_footer.isHidden = false
+                        }
+                        if arr.count <= 0 {
+                            self.searchResultsVC.resultState = .NoResult
+                        }else{
+                            self.searchResultsVC.resultState = .Result
+                        }
+                        self.searchResult.removeAll()
+                        arr.forEach{ self.searchResult.append($0) }
+                        return arr}
+                    .drive(self.updateResponse)}
+            .subscribe(onNext: { () in}).disposed(by: disposeBag)
+
         if let nextPageAction = nextPageAction {
             searchResultsTableView.rx.footerView
                 .throttle(RxTimeInterval.seconds(1), scheduler: MainScheduler())
                 .map {[weak self] (str) in
-                        guard let `self` = self else{return}
-                        if let _ = self.nextPageNetworkDis {
-                            self.nextPageNetworkDis?.dispose()
-                        }
+                    guard let `self` = self else{return}
+                    self.networkCancle()
+                    self.searchResultsVC.resultState = .Loading
                     self.currentPage += 1
-                    self.nextPageNetworkDis = nextPageAction(self.searchBar.text ?? "", self.currentPage)
+                    self.currentNetworkDis = nextPageAction(self.searchBar.text ?? "", self.currentPage)
                             .asDriver(onErrorJustReturn: [])
                             .map {[weak self] arr -> [T]  in
                                 guard let `self` = self else{return []}
@@ -146,54 +183,67 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
         Observable.merge(updateResponse.asObservable(), nextPageResponse.asObservable())
             .map {[weak self] (_) -> [T] in
                 guard let `self` = self else{return []}
+                self.currentNetworkDis = nil
                 return self.searchResult}
             .bind(to:searchResultsTableView.rx
                 .items(cellIdentifier: tvFactoryAction.cellIdentifier, cellType: Cell.self)) {[weak self] (row,data,cell) in
-                    self?.currentNetworkDis = nil
-                    self?.nextPageNetworkDis = nil
                     self?.tvFactoryAction.factory(row,data,cell)
         }.disposed(by: disposeBag)
 
         searchResultsTableView.rx
-            .modelSelected(T.self).bind(onNext: {[unowned self] (model) in
+            .modelSelected(T.self).bind(onNext: {[weak self] (model) in
+                guard let `self` = self else{return}
                 self.tvFactoryAction.didSelect(model)
-            })
-            .disposed(by: disposeBag)
+                //添加历史记录
+                if let text = self.searchBar.text {
+                    guard let _ = self.historyResponse.value.firstIndex(of: text) else{
+                        var arrRecord = self.historyResponse.value
+                        arrRecord.insert(text, at: 0)
+                        self.historyResponse.accept(arrRecord)
+                        return
+                    }
+                }
+            }).disposed(by: disposeBag)
 
         placeHolder.subscribe(onNext: {[unowned self] (str) in
             self.searchBar.placeholder = str
         }).disposed(by: disposeBag)
         
         historyTableView.frame = view.frame
-        historyTableView.rowHeight = UITableView.automaticDimension
-        historyTableView.delegate = self
-        historyTableView.dataSource = self
-        searchHistory()
         view.addSubview(historyTableView)
+        
+        historyResponse
+            .map {[weak self] (arr) -> [String] in
+            guard let `self` = self else{return arr}
+            self.userDefaultsManger.persistWithKeysArchive(arr as AnyObject, key: self.placeHolder.value)
+            return arr}
+            .bind(to: historyTableView.rx.items(cellIdentifier: "searchHistoryCellId")) {(row,strData,cell) in
+                cell.textLabel?.text = strData
+                cell.textLabel?.textColor = UIColor.black
+                cell.imageView?.image = UIImage(named: "时间排序")
+                cell.selectionStyle = .none}.disposed(by: disposeBag)
+        
+        historyTableView.rx
+            .modelSelected(String.self).subscribe(onNext: {[unowned self] (str) in
+                self.searchController.isActive = true
+                self.searchBar.rx.text.onNext(str)
+            }).disposed(by: disposeBag)
+        
+        historyTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
-    
-    @objc fileprivate func clearAction() {
-//        userDefaultsManger.clearKey(placeHolder.value)
-        arrHistory = []
-        historyTableView.reloadData()
-    }
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        searchBar.becomeFirstResponder()
-//    }
     
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 30
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = UIColor.lightGray
-        let lbl = UILabel(frame: CGRect(x: 15.0, y: 10.0, width: 150, height: 20))
+        view.backgroundColor = UIColor.systemGray
+        let lbl = UILabel(frame: CGRect(x: 15.0, y: 5, width: 150, height: 20))
         lbl.text = "搜索历史"
         lbl.textColor = UIColor.black
-        lbl.font = UIFont.systemFont(ofSize: 17)
+        lbl.font = UIFont.systemFont(ofSize: 15)
         view.addSubview(lbl)
         return view
     }
@@ -206,34 +256,8 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
         return 44.0
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrHistory.count
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "searchHistoryCellId")
-        if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: "searchHistoryCellId")
-        }
-        cell?.textLabel?.text = arrHistory[indexPath.row]
-        cell?.textLabel?.textColor = UIColor.black
-        cell?.imageView?.image = UIImage(named: "时间排序")
-        cell?.selectionStyle = .none
-        return cell!
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        searchBar.rx.text.onNext(arrHistory[indexPath.row])
-//        if arrHistory.count > indexPath.row {
-//            searchController.isActive = true
-//            searchBar.rx.text.onNext(arrHistory[indexPath.row])
-//            searchBar.becomeFirstResponder()
-//        }
     }
     
     deinit {
@@ -279,24 +303,21 @@ extension BDSuperSearchViewController {
         let historyView = UIView(frame: CGRect(x: 0, y: 0, width:UIScreen.main.bounds.width, height: 44))
         historyView.backgroundColor = UIColor.white
         let lbl = UILabel(frame: historyView.bounds)
-        lbl.text = "清空搜索历史(\(arrHistory.count))"
+        lbl.text = "清空搜索历史(\(historyResponse.value.count))"
         lbl.textAlignment = .center
         lbl.textColor = UIColor.blue
         historyView.addSubview(lbl)
         let btn = UIButton(frame: historyView.bounds)
         btn.setTitle("", for: .normal)
-        btn.addTarget(self, action: #selector(clearAction), for: .touchUpInside)
+        btn.rx.tap.subscribe(onNext: {[unowned self] (_) in
+            self.historyResponse.accept([])
+            }).disposed(by: disposeBag)
         btn.backgroundColor = UIColor.clear
         historyView.addSubview(btn)
         return historyView
     }
     
-    fileprivate func searchHistory() {
-        arrHistory.removeAll()
-//        if let abc = userDefaultsManger.getDataFromKeysArchive(placeHolder.value) {
-//            arrHistory = abc as! [String]
-//        }
-        arrHistory = ["121dsfsd","dfsdfsf","yu342h3u"]
-        historyTableView.reloadData()
+    fileprivate func networkCancle() {
+        currentNetworkDis?.dispose()
     }
 }
