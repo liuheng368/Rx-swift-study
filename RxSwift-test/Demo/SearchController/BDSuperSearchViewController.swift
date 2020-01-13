@@ -237,7 +237,9 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
         
         searchResultsTableView.rx.itemDeleted.subscribe(onNext: { (index) in
             print(index)
-        })
+        }).disposed(by: disposeBag)
+        
+        
         
         historyTableView.frame = view.frame
         historyTableView.register(UITableViewCell.self, forCellReuseIdentifier: "searchHistoryCellId")
