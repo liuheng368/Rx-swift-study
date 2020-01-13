@@ -32,6 +32,14 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
         self.tvFactoryAction = tvFactoryAction
         super.init(nibName: nil, bundle: nil)
         configureSearchController()
+        self.historyResponse = {[weak self] () -> BehaviorRelay<[String]> in
+            if let arr = self?.userDefaultsManger.getDataFromKeysArchive(placeHolder.value),
+                let ar = arr as? [String]{
+                return BehaviorRelay<[String]>(value: ar)
+            }else{
+                return BehaviorRelay<[String]>(value: [])
+            }
+        }()
     }
     
     public var placeHolder:BehaviorRelay<String> =
@@ -77,14 +85,7 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
     
     private let historyTableView = UITableView(frame: CGRect.zero, style: .plain)
     fileprivate let userDefaultsManger:DataPersistManger = DataPersistManger()
-    fileprivate var historyResponse: BehaviorRelay<[String]> {
-        if let arr = userDefaultsManger.getDataFromKeysArchive(placeHolder.value),
-            let ar = arr as? [String]{
-            return BehaviorRelay<[String]>(value: ar)
-        }else{
-            return BehaviorRelay<[String]>(value: [])
-        }
-    }
+    fileprivate var historyResponse: BehaviorRelay<[String]>!
     
     override func viewDidDisappear(_ animated: Bool) {
         networkCancle()
@@ -96,6 +97,11 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
+        placeHolder.subscribe(onNext: {[unowned self] (str) in
+            self.searchBar.placeholder = str
+        }).disposed(by: disposeBag)
+        
+        //MARK: search Rx
         searchBar.rx.text.orEmpty
             .filter{ $0.count <= 2 }
             .subscribe(onNext: {[weak self] _ in
@@ -157,7 +163,30 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
                         return arr}
                     .drive(self.updateResponse)}
             .subscribe(onNext: { () in}).disposed(by: disposeBag)
+        
+        searchBar.rx.textDidBeginEditing.subscribe(onNext: { (_) in
+            self.searchBar.showsCancelButton = true
+            if #available(iOS 13, *) {
+                self.searchBar.subviews.forEach { (vSearchBar) in
+                    vSearchBar.subviews.forEach { (vSB) in
+                        vSB.subviews.forEach { (v) in
+                            if let btn = v as? UIButton {
+                                btn.setTitle("取消", for: .normal)
+                            }
+                        }
+                    }
+                }
+            }else{
+                if let btn = self.searchBar.value(forKey: "cancelButton") as? UIButton{
+                    btn.setTitle("取消", for: .normal)
+                }
+            }}).disposed(by: disposeBag)
+        
+        searchBar.rx.cancelButtonClicked.subscribe(onNext: { (_) in
+            self.searchBar.showsCancelButton = false
+        }).disposed(by: disposeBag)
 
+        //MARK: nextPage Rx
         if let nextPageAction = nextPageAction {
             searchResultsTableView.rx.footerView
                 .throttle(RxTimeInterval.seconds(1), scheduler: MainScheduler())
@@ -180,6 +209,7 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
                 .subscribe(onNext: { () in}).disposed(by: disposeBag)
         }
 
+        //MARK: tableview Rx
         Observable.merge(updateResponse.asObservable(), nextPageResponse.asObservable())
             .map {[weak self] (_) -> [T] in
                 guard let `self` = self else{return []}
@@ -204,19 +234,16 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
                     }
                 }
             }).disposed(by: disposeBag)
-
-        placeHolder.subscribe(onNext: {[unowned self] (str) in
-            self.searchBar.placeholder = str
-        }).disposed(by: disposeBag)
         
         historyTableView.frame = view.frame
+        historyTableView.register(UITableViewCell.self, forCellReuseIdentifier: "searchHistoryCellId")
         view.addSubview(historyTableView)
         
         historyResponse
             .map {[weak self] (arr) -> [String] in
-            guard let `self` = self else{return arr}
-            self.userDefaultsManger.persistWithKeysArchive(arr as AnyObject, key: self.placeHolder.value)
-            return arr}
+                guard let `self` = self else{return arr}
+                self.userDefaultsManger.persistWithKeysArchive(arr as AnyObject, key: self.placeHolder.value)
+                return arr}
             .bind(to: historyTableView.rx.items(cellIdentifier: "searchHistoryCellId")) {(row,strData,cell) in
                 cell.textLabel?.text = strData
                 cell.textLabel?.textColor = UIColor.black
