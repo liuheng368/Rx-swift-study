@@ -164,7 +164,7 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
                     .drive(self.updateResponse)}
             .subscribe(onNext: { () in}).disposed(by: disposeBag)
         
-        searchBar.rx.textDidBeginEditing.subscribe(onNext: { (_) in
+        searchBar.rx.textDidBeginEditing.subscribe(onNext: {[unowned self] (_) in
             self.searchBar.showsCancelButton = true
             if #available(iOS 13, *) {
                 self.searchBar.subviews.forEach { (vSearchBar) in
@@ -182,7 +182,7 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
                 }
             }}).disposed(by: disposeBag)
         
-        searchBar.rx.cancelButtonClicked.subscribe(onNext: { (_) in
+        searchBar.rx.cancelButtonClicked.subscribe(onNext: {[unowned self] (_) in
             self.searchBar.showsCancelButton = false
         }).disposed(by: disposeBag)
 
