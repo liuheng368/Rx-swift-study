@@ -10,14 +10,58 @@ import UIKit
 import Moya
 import RxSwift
 import CleanJSON
+
+
+struct RootClass: Codable {
+    var nu: String
+    var state: String
+    var status: String
+    var data : [Dataa]
+    var com: String
+    var condition: String
+    var ischeck: String
+    var condition1: String
+    var ischeck1: String
+    var message: String
+}
+
+struct Dataa: Codable {
+    var time: String
+    var context: String
+    var ftime: String
+}
+
+
+
 class ViewController: UIViewController,UITableViewDelegate {
 
     @IBOutlet weak var tvMain: UITableView!
     
     var arr : [String] = []
     
+    func swiftChart() {
+//        Thread.sleep(forTimeInterval: TimeInterval(10))
+        sleep(10)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        swiftChart()
+        var dic : [String:[String]] = [:]
+        dic["key"] = []
+        for i in 0...1 {
+            dic["key"]?.append("as\(i)")
+        }
+        
+        let data = NSData(contentsOfFile: Bundle.main.path(forResource: "asd.json", ofType: "")!)! as Data
+//        let data = try! JSONSerialization.data(withJSONObject: ss, options: .prettyPrinted)
+        NSLog("%ld", Int(Date().timeIntervalSince1970 * 1000))
+        for i in 0...1 {
+            let a = try! CleanJSONDecoder().decode(RootClass.self, from: data)
+//            let a = try! JSONDecoder().decode(RootClass.self, from: data)
+        }
+        NSLog("%ld", Int(Date().timeIntervalSince1970 * 1000))
+        
         tvMain.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
         arr = ["textFiled",
                "TableViewSimpleViewController",

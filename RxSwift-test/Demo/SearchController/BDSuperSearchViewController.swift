@@ -211,17 +211,19 @@ class BDSuperSearchViewController<T:Decodable,Cell:UITableViewCell>: UIViewContr
         
         historyTableView.frame = view.frame
         view.addSubview(historyTableView)
-        
-        historyResponse
-            .map {[weak self] (arr) -> [String] in
-            guard let `self` = self else{return arr}
-            self.userDefaultsManger.persistWithKeysArchive(arr as AnyObject, key: self.placeHolder.value)
-            return arr}
-            .bind(to: historyTableView.rx.items(cellIdentifier: "searchHistoryCellId")) {(row,strData,cell) in
-                cell.textLabel?.text = strData
-                cell.textLabel?.textColor = UIColor.black
-                cell.imageView?.image = UIImage(named: "时间排序")
-                cell.selectionStyle = .none}.disposed(by: disposeBag)
+        historyResponse.subscribe { (e) in
+            print(e)
+        }
+//        historyResponse
+//            .map {[weak self] (arr) -> [String] in
+//            guard let `self` = self else{return arr}
+//            self.userDefaultsManger.persistWithKeysArchive(arr as AnyObject, key: self.placeHolder.value)
+//            return arr}
+//            .bind(to: historyTableView.rx.items(cellIdentifier: "searchHistoryCellId")) {(row,strData,cell) in
+//                cell.textLabel?.text = strData
+//                cell.textLabel?.textColor = UIColor.black
+//                cell.imageView?.image = UIImage(named: "时间排序")
+//                cell.selectionStyle = .none}.disposed(by: disposeBag)
         
         historyTableView.rx
             .modelSelected(String.self).subscribe(onNext: {[unowned self] (str) in

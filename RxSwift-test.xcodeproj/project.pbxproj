@@ -17,6 +17,7 @@
 		022EBD71238FB0770082022C /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022EBD70238FB0770082022C /* RegisterViewModel.swift */; };
 		023632C923BD91E4000B0FBD /* BDTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023632C723BD91E4000B0FBD /* BDTargetType.swift */; };
 		023632CB23BD9A2B000B0FBD /* MJRefresh+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023632CA23BD9A2B000B0FBD /* MJRefresh+Rx.swift */; };
+		0244136123E2E1CF002B137B /* asd.json in Resources */ = {isa = PBXBuildFile; fileRef = 0244136023E2E1CF002B137B /* asd.json */; };
 		024AA5CA23B9ED4B00B154DF /* BDSuperSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024AA5C823B9ED4B00B154DF /* BDSuperSearchViewController.swift */; };
 		024AA5CB23B9ED4B00B154DF /* BDSearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024AA5C923B9ED4B00B154DF /* BDSearchResultController.swift */; };
 		025F9733230BCADC00B73BB9 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F9732230BCADC00B73BB9 /* Operators.swift */; };
@@ -78,6 +79,7 @@
 		022EBD70238FB0770082022C /* RegisterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		023632C723BD91E4000B0FBD /* BDTargetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTargetType.swift; sourceTree = "<group>"; };
 		023632CA23BD9A2B000B0FBD /* MJRefresh+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MJRefresh+Rx.swift"; sourceTree = "<group>"; };
+		0244136023E2E1CF002B137B /* asd.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = asd.json; sourceTree = "<group>"; };
 		024AA5C823B9ED4B00B154DF /* BDSuperSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDSuperSearchViewController.swift; sourceTree = "<group>"; };
 		024AA5C923B9ED4B00B154DF /* BDSearchResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDSearchResultController.swift; sourceTree = "<group>"; };
 		025F9732230BCADC00B73BB9 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				0279056422EEFBB60005333B /* AppDelegate.swift */,
 				023632C523BD91E4000B0FBD /* NetWorkManger-Swift */,
 				0279056622EEFBB60005333B /* ViewController.swift */,
+				0244136023E2E1CF002B137B /* asd.json */,
 				028661D023C8260B0028B967 /* DDNetworkLoggerPlugin.swift */,
 				0279056822EEFBB60005333B /* Main.storyboard */,
 				0279056B22EEFBB70005333B /* Assets.xcassets */,
@@ -423,6 +426,7 @@
 				02EE692023015D1800DE893E /* TableViewSimpleViewController.xib in Resources */,
 				02AEB0BC2383EE730011791D /* eBook.pdf in Resources */,
 				029C12A12395195000864E23 /* PickImageViewController.xib in Resources */,
+				0244136123E2E1CF002B137B /* asd.json in Resources */,
 				02EE692D2303E8AF00DE893E /* TextFieldsViewController.xib in Resources */,
 				0279056F22EEFBB70005333B /* LaunchScreen.storyboard in Resources */,
 				0279056C22EEFBB70005333B /* Assets.xcassets in Resources */,

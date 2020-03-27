@@ -9,6 +9,7 @@
 import UIKit
 import Moya
 
+
 struct MVVMModel : Codable {
     var total_count: Int
     var incompleteResults: Bool
