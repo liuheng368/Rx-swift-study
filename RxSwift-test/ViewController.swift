@@ -34,7 +34,7 @@ struct Dataa: Codable {
 
 
 class ViewController: UIViewController,UITableViewDelegate {
-
+    
     @IBOutlet weak var tvMain: UITableView!
     
     var arr : [String] = []

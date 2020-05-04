@@ -9,7 +9,7 @@
          <BreakpointContent
             uuid = "C4F3A261-35C3-4D0C-B130-B38D08991BEC"
             shouldBeEnabled = "Yes"
-            ignoreCount = "0"
+            ignoreCount = "5"
             continueAfterRunningActions = "No">
          </BreakpointContent>
       </BreakpointProxy>

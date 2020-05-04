@@ -20,6 +20,14 @@ class ButtonViewController: UIViewController {
     @IBOutlet weak var vAct: UIActivityIndicatorView!
     @IBOutlet weak var vSlider: UISlider!
     @IBOutlet weak var vStepper: UIStepper!
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        var responser : UIResponder? = self as? UIResponder
+        while responser != nil{
+            print(responser)
+            responser = responser?.next
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
